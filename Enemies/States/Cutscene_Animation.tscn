@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Enemies/States/Cutscene_Animation.gd" type="Script" id=1]
+[ext_resource path="res://Enemies/Norman/Norman_Hand_Wakeup_Anim.tres" type="Animation" id=2]
+
+[node name="Cutscene_Animation" type="Node"]
+script = ExtResource( 1 )
+ANIMATION = ExtResource( 2 )

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Enemies/Bombo/Path2D.gd" type="Script" id=1]
+[ext_resource path="res://Environment/Crate_particle.png" type="Texture" id=2]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 0.152591, -0.0927795, -4.91395, 2.81586, 4.91395, -2.81586, 7.38764, -6.19175, -6.39745, 0.620843, 6.39745, -0.620843, 22.4557, -12.2309, -1.60118, -1.10426, 1.60118, 1.10426, 32.3506, -9.84763, 0, 0, 0, 0, 38.3605, 1.13343 )
+}
+
+[node name="Jump_Path" type="Path2D"]
+scale = Vector2( 3, 2 )
+curve = SubResource( 1 )
+script = ExtResource( 1 )
+
+[node name="Path_Follow" type="PathFollow2D" parent="."]
+position = Vector2( 0.152591, -0.0927795 )
+rotation = -0.812828
+loop = false
+lookahead = 1.0
+
+[node name="Sprite" type="Sprite" parent="Path_Follow"]
+texture = ExtResource( 2 )

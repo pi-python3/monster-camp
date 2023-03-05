@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Terrain/Water_Tileset.tres" type="TileSet" id=1]
+
+[node name="Water" type="TileMap" groups=["Water"]]
+scale = Vector2( 5, 5 )
+z_index = -500
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_quadrant_size = 4
+collision_layer = 16
+collision_mask = 0
+format = 1

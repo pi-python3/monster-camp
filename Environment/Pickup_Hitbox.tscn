@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 5, 5 )
+
+[node name="Pickup_Hitbox" type="Area2D"]
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource( 9 )
+
+[node name="Invincible_Wait" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true

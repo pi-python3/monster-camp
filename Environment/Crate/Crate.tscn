@@ -1,0 +1,244 @@
+[gd_scene load_steps=33 format=2]
+
+[ext_resource path="res://Enemies/Peapo/Seed_Break_Particles.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Environment/Crate_particle.png" type="Texture" id=2]
+[ext_resource path="res://Helpers/Sprite_Handler.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Environment/Crate/Crate.png" type="Texture" id=4]
+[ext_resource path="res://Environment/Pickup_Hitbox.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Audio/SFX/Crate_Slide.wav" type="AudioStream" id=6]
+[ext_resource path="res://Enemies/Move_Particles.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Environment/Object_shadows.png" type="Texture" id=8]
+[ext_resource path="res://Environment/Crate_State_Machine.gd" type="Script" id=9]
+[ext_resource path="res://Environment/Crate/Hit.gd" type="Script" id=10]
+[ext_resource path="res://Environment/Crate/Break.gd" type="Script" id=11]
+[ext_resource path="res://Environment/Crate/Carted.gd" type="Script" id=12]
+[ext_resource path="res://Environment/Crate/Idle.gd" type="Script" id=13]
+[ext_resource path="res://Environment/Crate/Slide.gd" type="Script" id=14]
+[ext_resource path="res://Environment/Crate/HitSlide.gd" type="Script" id=15]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4, 2 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 4, 4 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 4.5, 4.5 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 4 )
+region = Rect2( 8, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 4 )
+region = Rect2( 16, 0, 8, 8 )
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=8]
+length = 0.2
+tracks/0/type = "method"
+tracks/0/path = NodePath("../Sprite_Handler")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "flash_on"
+}, {
+"args": [  ],
+"method": "flash_off"
+} ]
+}
+
+[sub_resource type="Gradient" id=9]
+offsets = PoolRealArray( 0, 0.564202, 0.988327, 1 )
+colors = PoolColorArray( 0.801555, 0.804688, 0.760257, 1, 0.783967, 0.789062, 0.740654, 1, 1, 1, 1, 0.474708, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=10]
+gradient = SubResource( 9 )
+
+[sub_resource type="Curve" id=11]
+_data = [ Vector2( 0, 0.507827 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=12]
+curve = SubResource( 11 )
+
+[sub_resource type="ParticlesMaterial" id=13]
+flag_disable_z = true
+spread = 10.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 1.0
+angular_velocity = 258.68
+angular_velocity_random = 0.6
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -7.19
+scale = 15.0
+scale_random = 0.33
+scale_curve = SubResource( 12 )
+color_ramp = SubResource( 10 )
+
+[sub_resource type="Curve" id=14]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.158806 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=15]
+curve = SubResource( 14 )
+
+[sub_resource type="ParticlesMaterial" id=16]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 70, 0 )
+initial_velocity = 45.0
+initial_velocity_random = 0.5
+angular_velocity = 360.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 40.77
+scale_curve = SubResource( 15 )
+hue_variation = 0.01
+
+[sub_resource type="ParticlesMaterial" id=17]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 70, 0 )
+initial_velocity = 45.0
+initial_velocity_random = 0.5
+angular_velocity = 360.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 40.77
+scale = 2.0
+scale_curve = SubResource( 15 )
+hue_variation = 0.01
+
+[node name="Crate" type="KinematicBody2D" groups=["Cartable", "Crate", "Interactable", "Pushable"]]
+modulate = Color( 1, 1, 1, 0.72549 )
+position = Vector2( 4, 4 )
+collision_mask = 23
+script = ExtResource( 9 )
+START_STATE = NodePath("States/Idle")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, 2 )
+shape = SubResource( 1 )
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource( 2 )
+
+[node name="Slide_Hitbox" type="Area2D" parent="." groups=["Universal_Hitbox"]]
+visible = false
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Slide_Hitbox"]
+shape = SubResource( 3 )
+
+[node name="Pickup_Hitbox" parent="." instance=ExtResource( 5 )]
+visible = false
+
+[node name="Projectile_Hitbox" type="Area2D" parent="."]
+visible = false
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Projectile_Hitbox"]
+position = Vector2( 0, 2 )
+shape = SubResource( 1 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Sprite_Handler" parent="." instance=ExtResource( 3 )]
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 7 )
+frame = 1
+
+[node name="Shadow" type="Sprite" parent="Sprite" groups=["No_Flash"]]
+visible = false
+modulate = Color( 1, 1, 1, 0.501961 )
+position = Vector2( 0, 8 )
+z_index = -1
+texture = ExtResource( 8 )
+hframes = 3
+frame = 2
+
+[node name="Animation" type="AnimationPlayer" parent="Sprite"]
+anims/Hit = SubResource( 8 )
+
+[node name="Move_Particles" parent="." instance=ExtResource( 7 )]
+process_material = SubResource( 13 )
+
+[node name="Push_Wait" type="Timer" parent="Move_Particles"]
+wait_time = 0.1
+one_shot = true
+
+[node name="Hit_Particles" parent="." instance=ExtResource( 1 )]
+scale = Vector2( 1, 1 )
+amount = 12
+process_material = SubResource( 16 )
+texture = ExtResource( 2 )
+
+[node name="Particle_Wait" type="Timer" parent="Hit_Particles"]
+one_shot = true
+
+[node name="Hit_Particles2" parent="." instance=ExtResource( 1 )]
+scale = Vector2( 1, 1 )
+amount = 12
+process_material = SubResource( 17 )
+texture = ExtResource( 2 )
+
+[node name="States" type="Node" parent="."]
+
+[node name="Idle" type="Node" parent="States"]
+script = ExtResource( 13 )
+
+[node name="Slide" type="Node" parent="States"]
+script = ExtResource( 14 )
+hit_slide = 550.0
+
+[node name="Hit_Slide" type="Node" parent="States"]
+script = ExtResource( 15 )
+
+[node name="Carted" type="Node" parent="States"]
+script = ExtResource( 12 )
+move_to_cart_speed = 3.0
+
+[node name="Hit" type="Node" parent="States"]
+script = ExtResource( 10 )
+
+[node name="Cooldown" type="Timer" parent="States/Hit"]
+wait_time = 0.2
+one_shot = true
+
+[node name="Break" type="Node" parent="States"]
+script = ExtResource( 11 )
+
+[node name="Push_SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -10.0
+bus = "SFX_Quiet"
+
+[connection signal="timeout" from="Pickup_Hitbox/Invincible_Wait" to="." method="_on_Invincible_Wait_timeout"]
+[connection signal="timeout" from="Move_Particles/Push_Wait" to="." method="_on_Push_Wait_timeout"]
+[connection signal="timeout" from="Hit_Particles/Particle_Wait" to="States/Break" method="_on_Particle_Wait_timeout"]
+[connection signal="timeout" from="States/Hit/Cooldown" to="States/Hit" method="_on_Cooldown_timeout"]
+
+[editable path="Pickup_Hitbox"]

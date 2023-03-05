@@ -1,0 +1,175 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://Hero/Dummy/Dummy.png" type="Texture" id=1]
+[ext_resource path="res://Hero/Dummy/Dummy.gd" type="Script" id=2]
+[ext_resource path="res://Hero/Dummy/Dummy_Idle.gd" type="Script" id=3]
+[ext_resource path="res://Hero/Dummy/Dummy_Hit.gd" type="Script" id=4]
+[ext_resource path="res://Enemies/Shadow.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Hero/Dummy/Target.png" type="Texture" id=6]
+[ext_resource path="res://Helpers/Sprite_Handler.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Hero/Dummy/Target.gd" type="Script" id=8]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 3.13106
+height = 1.6181
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 3.37288
+height = 2.60371
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 8, 8 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=5]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 0 ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.3
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 0 ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.1
+tracks/0/type = "method"
+tracks/0/path = NodePath("../Sprite_Handler")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "flash_on"
+}, {
+"args": [  ],
+"method": "flash_off"
+} ]
+}
+
+[sub_resource type="Animation" id=8]
+
+[sub_resource type="Animation" id=9]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -10.0, 0.0, 10.0, 0.0 ]
+}
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 15, 15 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 6 )
+region = Rect2( 15, 0, 15, 15 )
+
+[sub_resource type="SpriteFrames" id=12]
+animations = [ {
+"frames": [ SubResource( 10 ), SubResource( 11 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="Dummy" type="KinematicBody2D" groups=["Hero"]]
+scale = Vector2( 5, 5 )
+collision_layer = 4
+collision_mask = 3
+script = ExtResource( 2 )
+START_STATE = NodePath("States/Idle")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource( 2 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Sprite_Handler" parent="." instance=ExtResource( 7 )]
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 4 )
+
+[node name="Animation" type="AnimationPlayer" parent="Sprite"]
+anims/Attack_Down = SubResource( 5 )
+anims/Attack_Front = SubResource( 6 )
+anims/Hit = SubResource( 7 )
+anims/Idle = SubResource( 8 )
+anims/Move = SubResource( 9 )
+
+[node name="Target" type="AnimatedSprite" parent="."]
+scale = Vector2( 1, 1 )
+frames = SubResource( 12 )
+speed_scale = 0.5
+playing = true
+script = ExtResource( 8 )
+
+[node name="Tween" type="Tween" parent="Target"]
+
+[node name="Tween2" type="Tween" parent="Target"]
+
+[node name="Shadow" parent="." instance=ExtResource( 5 )]
+
+[node name="States" type="Node" parent="."]
+
+[node name="Idle" type="KinematicBody2D" parent="States"]
+script = ExtResource( 3 )
+
+[node name="Hit" type="KinematicBody2D" parent="States"]
+script = ExtResource( 4 )
+
+[node name="Cooldown" type="Timer" parent="States/Hit"]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="animation_finished" from="Sprite/Animation" to="." method="_on_animation_finished"]
+[connection signal="timeout" from="States/Hit/Cooldown" to="States/Hit" method="_on_Cooldown_timeout"]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Enemies/Peapo/Seed_Break_Particle.tres" type="Material" id=1]
+[ext_resource path="res://Enemies/Hit_Particles.gd" type="Script" id=2]
+
+[node name="Hit_Particles" type="Particles2D"]
+scale = Vector2( 5, 5 )
+emitting = false
+lifetime = 0.6
+one_shot = true
+explosiveness = 0.92
+randomness = 0.06
+process_material = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+[connection signal="timeout" from="Cooldown" to="." method="_on_Cooldown_timeout"]

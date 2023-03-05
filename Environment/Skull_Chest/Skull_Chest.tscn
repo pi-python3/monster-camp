@@ -1,0 +1,196 @@
+[gd_scene load_steps=32 format=2]
+
+[ext_resource path="res://Environment/Skull_Chest/Skull_chest.png" type="Texture" id=1]
+[ext_resource path="res://Environment/Skull_Chest/Skull_Chest.gd" type="Script" id=2]
+[ext_resource path="res://Environment/Object_shadows.png" type="Texture" id=3]
+[ext_resource path="res://Environment/Skull_Chest/Open_Particles2.gd" type="Script" id=4]
+[ext_resource path="res://Environment/Skull_Chest/Star_particle.png" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 4, 2 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 8, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 24, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 40, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 1 )
+region = Rect2( 56, 0, 8, 8 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"loop": true,
+"name": "Flash",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 1 ) ],
+"loop": true,
+"name": "Closed",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 11 ) ],
+"loop": true,
+"name": "Open",
+"speed": 5.0
+} ]
+
+[sub_resource type="Gradient" id=25]
+offsets = PoolRealArray( 0, 0.295844, 0.665037, 1 )
+colors = PoolColorArray( 0.152941, 0.152941, 0.211765, 1, 1, 0.894118, 0.470588, 1, 1, 0.894118, 0.470588, 1, 1, 0.894118, 0.470588, 0 )
+
+[sub_resource type="GradientTexture" id=13]
+gradient = SubResource( 25 )
+
+[sub_resource type="Curve" id=64]
+_data = [ Vector2( 0, 0.173502 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=15]
+curve = SubResource( 64 )
+
+[sub_resource type="ParticlesMaterial" id=16]
+emission_shape = 2
+emission_box_extents = Vector3( 4, 0, 0 )
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 40, 0 )
+initial_velocity = 10.0
+angular_velocity = 125.48
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+radial_accel = -20.0
+damping = 20.33
+damping_random = 0.45
+scale = 2.0
+scale_curve = SubResource( 15 )
+color_ramp = SubResource( 13 )
+hue_variation = 0.01
+hue_variation_random = 1.0
+
+[sub_resource type="Gradient" id=17]
+offsets = PoolRealArray( 0.660147, 0.997555 )
+colors = PoolColorArray( 1, 0.894118, 0.470588, 1, 1, 0.894118, 0.470588, 0 )
+
+[sub_resource type="GradientTexture" id=65]
+gradient = SubResource( 17 )
+
+[sub_resource type="Curve" id=14]
+_data = [ Vector2( 0, 0.173502 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=66]
+curve = SubResource( 14 )
+
+[sub_resource type="ParticlesMaterial" id=19]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 20.0
+angular_velocity = 125.48
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+radial_accel = -20.0
+scale = 2.0
+scale_curve = SubResource( 66 )
+color_ramp = SubResource( 65 )
+hue_variation = 0.01
+hue_variation_random = 1.0
+
+[sub_resource type="Gradient" id=20]
+offsets = PoolRealArray( 0.791667, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=21]
+gradient = SubResource( 20 )
+
+[sub_resource type="Curve" id=22]
+_data = [ Vector2( 0, 0.43357 ), 0.0, 0.0, 0, 0, Vector2( 0.446429, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=23]
+curve = SubResource( 22 )
+
+[sub_resource type="ParticlesMaterial" id=24]
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 93.74
+flatness = 1.0
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 50.0
+angular_velocity = 207.58
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 23 )
+color_ramp = SubResource( 21 )
+
+[node name="Skull_Chest" type="KinematicBody2D" groups=["Skull_Chest"]]
+script = ExtResource( 2 )
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 2 )
+shape = SubResource( 3 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 2 )
+animation = "Open"
+speed_scale = 2.0
+
+[node name="Shadow" type="Sprite" parent="Sprite" groups=["No_Flash"]]
+modulate = Color( 1, 1, 1, 0.501961 )
+position = Vector2( 0, 8 )
+z_index = -1
+texture = ExtResource( 3 )
+hframes = 3
+frame = 2
+
+[node name="Open_Particles" type="Particles2D" parent="Sprite"]
+position = Vector2( 0, 0.5 )
+amount = 32
+process_material = SubResource( 16 )
+
+[node name="Open_Particles2" type="Particles2D" parent="Sprite"]
+position = Vector2( 0, -3.5 )
+emitting = false
+amount = 32
+process_material = SubResource( 19 )
+script = ExtResource( 4 )
+
+[node name="Open_Star_Particles" type="Particles2D" parent="Sprite"]
+emitting = false
+amount = 5
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.78
+process_material = SubResource( 24 )
+texture = ExtResource( 5 )
+
+[connection signal="animation_finished" from="Sprite" to="." method="_on_Sprite_animation_finished"]

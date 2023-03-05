@@ -1,0 +1,115 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://UI/Control_Arrow.gd" type="Script" id=1]
+[ext_resource path="res://UI/UI_arrow.png" type="Texture" id=2]
+[ext_resource path="res://Environment/Explosion_particle.png" type="Texture" id=3]
+[ext_resource path="res://Hero/Trail.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Hero/Trail_Width_Curve.tres" type="Curve" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Hover"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -10 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.762646 )
+colors = PoolColorArray( 0.501961, 0.211765, 0.419608, 1, 0.501961, 0.211765, 0.419608, 0.321569 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="Curve" id=4]
+max_value = 5.0
+_data = [ Vector2( 0, 4.76796 ), 0.0, 1.07947, 0, 0, Vector2( 1, 1.34454 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 0.0
+gravity = Vector3( 0, 50, 0 )
+initial_velocity = 10.0
+angular_velocity = 427.66
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 50.0
+scale_curve = SubResource( 5 )
+color_ramp = SubResource( 3 )
+
+[sub_resource type="Gradient" id=7]
+colors = PoolColorArray( 0.501961, 0.211765, 0.419608, 0.321569, 0.501961, 0.211765, 0.419608, 1 )
+
+[node name="Control_Arrow" type="Position2D"]
+scale = Vector2( 5, 5 )
+script = ExtResource( 1 )
+tween_time = 0.3
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Hover = SubResource( 1 )
+anims/RESET = SubResource( 8 )
+
+[node name="Trail_Tween" type="Tween" parent="."]
+
+[node name="Switch_Trail_Particles" type="Particles2D" parent="."]
+show_behind_parent = true
+z_index = -10
+emitting = false
+amount = 40
+lifetime = 0.5
+fixed_fps = 60
+local_coords = false
+process_material = SubResource( 6 )
+texture = ExtResource( 3 )
+
+[node name="Trail" parent="Switch_Trail_Particles" instance=ExtResource( 4 )]
+show_behind_parent = true
+width = 3.0
+width_curve = ExtResource( 5 )
+default_color = Color( 0.501961, 0.211765, 0.419608, 1 )
+gradient = SubResource( 7 )
+target_path = NodePath("..")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enable = true
+
+[node name="Sprite" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 0.5, -1 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 2 )
+offset = Vector2( 0, -1 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[connection signal="tween_all_completed" from="Tween" to="." method="_on_Tween_tween_all_completed"]

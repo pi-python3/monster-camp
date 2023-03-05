@@ -1,0 +1,104 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Helpers/Scene_Transition.gd" type="Script" id=1]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Close"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Bottom_Rect:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -357.443, 251.835 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Top_Rect:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 744, -906 ), Vector2( 317.727, -526.236 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Open"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Bottom_Rect:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -357.443, 251.835 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Top_Rect:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 318, -526 ), Vector2( 744, -906 ) ]
+}
+
+[node name="Scene_Transition" type="CanvasLayer"]
+pause_mode = 2
+process_priority = -5
+layer = 10
+script = ExtResource( 1 )
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Animation" type="AnimationPlayer" parent="Control"]
+pause_mode = 2
+anims/Close = SubResource( 1 )
+anims/Open = SubResource( 3 )
+
+[node name="Bottom_Rect" type="ColorRect" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -178.721
+margin_top = 125.918
+margin_right = 221.278
+margin_bottom = 125.917
+rect_rotation = 45.0
+color = Color( 0.152941, 0.152941, 0.211765, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Top_Rect" type="ColorRect" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 530.864
+margin_top = -716.118
+margin_right = 930.863
+margin_bottom = -716.118
+rect_rotation = 45.0
+color = Color( 0.152941, 0.152941, 0.211765, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

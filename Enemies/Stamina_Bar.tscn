@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Enemies/Stamina_Bar_Frames.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Enemies/Stamina_Bar.gd" type="Script" id=2]
+[ext_resource path="res://Enemies/Stamina_Fill_Anim.tres" type="Animation" id=3]
+
+[node name="Stamina_Bar" type="AnimatedSprite" groups=["No_Flash"]]
+position = Vector2( 0, 6 )
+frames = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Bar_Animation" type="AnimationPlayer" parent="."]
+anims/Fill = ExtResource( 3 )
+anims/Stamina_Fill_Anim = ExtResource( 3 )
+
+[connection signal="animation_finished" from="Bar_Animation" to="." method="_on_Bar_Animation_animation_finished"]
+[connection signal="animation_started" from="Bar_Animation" to="." method="_on_Bar_Animation_animation_started"]

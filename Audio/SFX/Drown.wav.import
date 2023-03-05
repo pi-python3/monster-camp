@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Drown.wav-e33edf2170ab947ade1ae4f6510e924f.sample"
+
+[deps]
+
+source_file="res://Audio/SFX/Drown.wav"
+dest_files=[ "res://.import/Drown.wav-e33edf2170ab947ade1ae4f6510e924f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

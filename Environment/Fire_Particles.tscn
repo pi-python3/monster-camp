@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Environment/Cross_Particle.tres" type="Texture" id=1]
+[ext_resource path="res://Environment/Explosion_Particle.tres" type="Material" id=2]
+
+[node name="Fire_Particles" type="Particles2D"]
+scale = Vector2( 1.2, 1.2 )
+z_index = 10
+z_as_relative = false
+emitting = false
+amount = 100
+one_shot = true
+explosiveness = 0.7
+process_material = ExtResource( 2 )
+texture = ExtResource( 1 )

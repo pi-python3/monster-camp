@@ -1,0 +1,94 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://UI/Combo/Combo_meter_border2.png" type="Texture" id=2]
+[ext_resource path="res://UI/Combo/Combo_meter_border_over.png" type="Texture" id=3]
+[ext_resource path="res://UI/Hero_head.png" type="Texture" id=5]
+[ext_resource path="res://UI/Combo/Combo_meter_fill3.png" type="Texture" id=7]
+[ext_resource path="res://UI/HUD/HP_Meter.gd" type="Script" id=8]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Hit"
+length = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("HP_Meter:tint_progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Color( 100, 100, 100, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="UI" type="Control"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HP_Meter" type="TextureProgress" parent="."]
+self_modulate = Color( 0.894118, 0.368627, 0.368627, 1 )
+anchor_bottom = 1.0
+margin_left = -10.0
+margin_right = -2.0
+margin_bottom = -560.0
+rect_scale = Vector2( 5, 5 )
+max_value = 16.0
+step = 0.0
+value = 6.0
+texture_under = ExtResource( 2 )
+texture_over = ExtResource( 3 )
+texture_progress = ExtResource( 7 )
+fill_mode = 3
+tint_under = Color( 1, 1, 1, 0.501961 )
+tint_progress = Color( 100, 100, 100, 1 )
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 4
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Shadow" type="ColorRect" parent="HP_Meter"]
+visible = false
+show_behind_parent = true
+anchor_bottom = 1.0
+margin_top = 29.0
+margin_right = 12.0
+margin_bottom = 1.0
+rect_scale = Vector2( 0.5, 1 )
+color = Color( 0, 0, 0, 0.517647 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween1" type="Tween" parent="HP_Meter"]
+
+[node name="Tween2" type="Tween" parent="HP_Meter"]
+
+[node name="Hero_Icon" type="TextureRect" parent="HP_Meter"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -4.0
+margin_top = -8.0
+margin_right = 4.0
+margin_bottom = 4.76837e-07
+rect_pivot_offset = Vector2( 4, 4 )
+texture = ExtResource( 5 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Animation" type="AnimationPlayer" parent="HP_Meter"]
+root_node = NodePath("../..")
+anims/Hit = SubResource( 1 )
+
+[connection signal="tween_all_completed" from="HP_Meter/Tween1" to="HP_Meter" method="_on_Tween1_tween_all_completed"]

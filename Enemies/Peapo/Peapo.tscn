@@ -1,0 +1,406 @@
+[gd_scene load_steps=72 format=2]
+
+[ext_resource path="res://Enemies/Peapo/Peapo.png" type="Texture" id=1]
+[ext_resource path="res://Enemies/State_Machine.gd" type="Script" id=2]
+[ext_resource path="res://Enemies/Peapo/Move.gd" type="Script" id=3]
+[ext_resource path="res://Enemies/Peapo/Eyes.gd" type="Script" id=4]
+[ext_resource path="res://Enemies/Peapo/Attack.gd" type="Script" id=5]
+[ext_resource path="res://Enemies/Peapo/Aim.gd" type="Script" id=6]
+[ext_resource path="res://Helpers/Sprite_Handler.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Enemies/Hit.gd" type="Script" id=8]
+[ext_resource path="res://Enemies/Monster_UI.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Enemies/Monster_Effects.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Enemies/Peapo/peapo_eye.png" type="Texture" id=11]
+[ext_resource path="res://Enemies/Keesee/Keesee_Attack_Trail.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Enemies/States/AI_Run.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Enemies/Die.gd" type="Script" id=14]
+[ext_resource path="res://Enemies/Boko/Idle.gd" type="Script" id=15]
+[ext_resource path="res://Enemies/Hit_Particles.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Helpers/Target_Point.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Enemies/Death_Right.tres" type="Animation" id=18]
+[ext_resource path="res://Enemies/Death_Left.tres" type="Animation" id=19]
+[ext_resource path="res://Enemies/Sprite.gd" type="Script" id=20]
+[ext_resource path="res://Enemies/Shadow.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Enemies/Hat.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Enemies/Water_Effect.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Enemies/States/Drown.gd" type="Script" id=24]
+[ext_resource path="res://Enemies/Drown_Anim.tres" type="Animation" id=25]
+[ext_resource path="res://Enemies/Dance.tres" type="Animation" id=26]
+[ext_resource path="res://Enemies/Components/Component_Cartable.tscn" type="PackedScene" id=27]
+[ext_resource path="res://Enemies/Components/Component_Push_Objects.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Enemies/Components/Component_Manager.tscn" type="PackedScene" id=29]
+[ext_resource path="res://Enemies/Components/Component_Can_Drown.tscn" type="PackedScene" id=30]
+[ext_resource path="res://Enemies/Components/Component_Grounded.tscn" type="PackedScene" id=31]
+[ext_resource path="res://Enemies/Components/Component_Dance.tscn" type="PackedScene" id=32]
+
+[sub_resource type="CapsuleShape2D" id=40]
+radius = 2.13489
+height = 0.296708
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 2.83462
+height = 1.67171
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 8, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 24, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 40, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 56, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 1 )
+region = Rect2( 72, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 1 )
+region = Rect2( 80, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 1 )
+region = Rect2( 88, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 1 )
+region = Rect2( 104, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 1 )
+region = Rect2( 112, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 1 )
+region = Rect2( 120, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=38]
+atlas = ExtResource( 1 )
+region = Rect2( 128, 0, 8, 8 )
+
+[sub_resource type="SpriteFrames" id=12]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 11 )
+region = Rect2( 8, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 11 )
+region = Rect2( 16, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 11 )
+region = Rect2( 24, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 11 )
+region = Rect2( 32, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 11 )
+region = Rect2( 40, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 11 )
+region = Rect2( 48, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 11 )
+region = Rect2( 56, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 11 )
+region = Rect2( 64, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 11 )
+region = Rect2( 72, 0, 8, 8 )
+
+[sub_resource type="SpriteFrames" id=23]
+animations = [ {
+"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=24]
+length = 0.2
+tracks/0/type = "method"
+tracks/0/path = NodePath("../Sprite_Handler")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "flash_on"
+}, {
+"args": [  ],
+"method": "flash_off"
+} ]
+}
+
+[sub_resource type="Animation" id=25]
+length = 0.5
+
+[sub_resource type="Animation" id=26]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 10.0, 0.0, -10.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=39]
+resource_name = "New_Seed"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 10, 11, 16 ]
+}
+
+[sub_resource type="Animation" id=27]
+resource_name = "Shoot_Down"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 7, 6 ]
+}
+
+[sub_resource type="Animation" id=28]
+resource_name = "Shoot_Left"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 3 ]
+}
+
+[sub_resource type="Animation" id=29]
+resource_name = "Shoot_Right"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 0 ]
+}
+
+[sub_resource type="Animation" id=30]
+resource_name = "Shoot_Up"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 8, 9 ]
+}
+
+[node name="Peapo" type="KinematicBody2D" groups=["Cartable", "Grounded", "Monster", "Peapo"]]
+scale = Vector2( 5, 5 )
+collision_layer = 2
+collision_mask = 23
+script = ExtResource( 2 )
+START_STATE = NodePath("States/Idle")
+monster_type = "peapo"
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( -0.5, 2 )
+shape = SubResource( 40 )
+
+[node name="Hitbox" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
+collision_mask = 5
+
+[node name="Collision" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( -0.5, 0.5 )
+shape = SubResource( 1 )
+
+[node name="Target_Point" parent="." instance=ExtResource( 17 )]
+
+[node name="Components" parent="." instance=ExtResource( 29 )]
+
+[node name="Push_Objects" parent="Components" instance=ExtResource( 28 )]
+
+[node name="Grounded" parent="Components" instance=ExtResource( 31 )]
+
+[node name="Can_Drown" parent="Components" instance=ExtResource( 30 )]
+
+[node name="Cartable" parent="Components" instance=ExtResource( 27 )]
+
+[node name="Dance" parent="Components" instance=ExtResource( 32 )]
+
+[node name="Sprite_Handler" parent="." instance=ExtResource( 7 )]
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 12 )
+script = ExtResource( 20 )
+
+[node name="Eyes" type="AnimatedSprite" parent="Sprite"]
+visible = false
+frames = SubResource( 23 )
+script = ExtResource( 4 )
+
+[node name="Animation" type="AnimationPlayer" parent="Sprite"]
+anims/Dance = ExtResource( 26 )
+anims/Death_Left = ExtResource( 19 )
+anims/Death_Right = ExtResource( 18 )
+anims/Drown_Anim = ExtResource( 25 )
+anims/Hit = SubResource( 24 )
+anims/Idle = SubResource( 25 )
+anims/Move = SubResource( 26 )
+anims/New_Seed = SubResource( 39 )
+anims/Shoot_Down = SubResource( 27 )
+anims/Shoot_Left = SubResource( 28 )
+anims/Shoot_Right = SubResource( 29 )
+anims/Shoot_Up = SubResource( 30 )
+
+[node name="Hat" parent="Sprite" instance=ExtResource( 22 )]
+position = Vector2( -0.5, -4 )
+
+[node name="UI" parent="." instance=ExtResource( 9 )]
+
+[node name="Effects" parent="." instance=ExtResource( 10 )]
+attack_trail = {
+"active": false,
+"name": "Trail",
+"trail_scene": ExtResource( 12 )
+}
+
+[node name="Hit_Particles" parent="." instance=ExtResource( 16 )]
+
+[node name="Shadow" parent="." instance=ExtResource( 21 )]
+position = Vector2( -0.5, 4.5 )
+
+[node name="Water_Effect" parent="." instance=ExtResource( 23 )]
+
+[node name="States" type="Node" parent="."]
+
+[node name="Idle" type="Node" parent="States"]
+script = ExtResource( 15 )
+on_enter = {
+"animate_shadow": false,
+"animation": "",
+"reset_frame": false
+}
+
+[node name="Move" type="Node" parent="States"]
+script = ExtResource( 3 )
+ACCELERATION = 1.17
+MAX_MOVESPEED = 85.0
+
+[node name="AI_Move" parent="States" instance=ExtResource( 13 )]
+
+[node name="Aim" type="Node" parent="States"]
+script = ExtResource( 6 )
+MAX_SLOW_MOVESPEED = 40.0
+
+[node name="Attack" type="Node" parent="States"]
+script = ExtResource( 5 )
+
+[node name="Hit" type="Node" parent="States"]
+script = ExtResource( 8 )
+
+[node name="Cooldown" type="Timer" parent="States/Hit"]
+wait_time = 0.5
+one_shot = true
+
+[node name="Drown" type="Node" parent="States"]
+script = ExtResource( 24 )
+
+[node name="Die" type="Node" parent="States"]
+script = ExtResource( 14 )
+
+[connection signal="animation_finished" from="Sprite/Animation" to="." method="_on_animation_finished"]
+[connection signal="animation_finished" from="Sprite/Animation" to="States/Attack" method="_on_Animation_animation_finished"]
+[connection signal="timeout" from="States/Hit/Cooldown" to="States/Hit" method="_on_Cooldown_timeout"]

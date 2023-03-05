@@ -1,0 +1,249 @@
+[gd_scene load_steps=42 format=2]
+
+[ext_resource path="res://Enemies/Boko/Boko_Spriteframes.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Enemies/State_Machine.gd" type="Script" id=2]
+[ext_resource path="res://Enemies/Boko/Move.gd" type="Script" id=3]
+[ext_resource path="res://Enemies/Boko/Idle.gd" type="Script" id=4]
+[ext_resource path="res://Enemies/Boko/Attack.gd" type="Script" id=5]
+[ext_resource path="res://Enemies/Slash_Effect_Frames.tres" type="SpriteFrames" id=6]
+[ext_resource path="res://Helpers/Sprite_Handler.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Enemies/Hit.gd" type="Script" id=8]
+[ext_resource path="res://Enemies/Monster_UI.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Enemies/States/AI_Run.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Enemies/Boko/Slash_Hitbox.gd" type="Script" id=11]
+[ext_resource path="res://Enemies/Sprite.gd" type="Script" id=12]
+[ext_resource path="res://Enemies/Monster_Effects.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Enemies/Die.gd" type="Script" id=14]
+[ext_resource path="res://Enemies/Eyes.png" type="Texture" id=15]
+[ext_resource path="res://Enemies/Eyes.gd" type="Script" id=16]
+[ext_resource path="res://Enemies/Death_Launch_Right.tres" type="Animation" id=17]
+[ext_resource path="res://Enemies/Death_Right.tres" type="Animation" id=18]
+[ext_resource path="res://Enemies/Death_Left.tres" type="Animation" id=19]
+[ext_resource path="res://Shaders/Idle.tres" type="Material" id=20]
+[ext_resource path="res://Enemies/Boko/Boko_axe.png" type="Texture" id=21]
+[ext_resource path="res://Enemies/Move.tres" type="Animation" id=22]
+[ext_resource path="res://Enemies/Death_Launch_Left.tres" type="Animation" id=23]
+[ext_resource path="res://Enemies/Slash_Right.tres" type="Animation" id=24]
+[ext_resource path="res://Enemies/Slash_Left.tres" type="Animation" id=25]
+[ext_resource path="res://Enemies/Boko/Hitbox.gd" type="Script" id=26]
+[ext_resource path="res://Enemies/Hit_Anim.tres" type="Animation" id=27]
+[ext_resource path="res://Enemies/Components/Component_Cartable.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Helpers/Target_Point.tscn" type="PackedScene" id=29]
+[ext_resource path="res://Enemies/Humanoid_Collision_Shape.tres" type="Shape2D" id=30]
+[ext_resource path="res://Enemies/Hat.tscn" type="PackedScene" id=31]
+[ext_resource path="res://Enemies/Components/Component_Dance.tscn" type="PackedScene" id=33]
+[ext_resource path="res://Enemies/Components/Component_Push_Objects.tscn" type="PackedScene" id=36]
+[ext_resource path="res://Enemies/Components/Component_Manager.tscn" type="PackedScene" id=37]
+[ext_resource path="res://Enemies/Components/Component_Can_Drown.tscn" type="PackedScene" id=38]
+[ext_resource path="res://Enemies/Components/Component_Grounded.tscn" type="PackedScene" id=39]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 2.46321
+height = 0.377663
+
+[sub_resource type="CapsuleShape2D" id=8]
+radius = 5.56358
+height = 4.52801
+
+[sub_resource type="Animation" id=10]
+length = 0.5
+
+[sub_resource type="Animation" id=12]
+resource_name = "Jump"
+length = 0.35
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.35 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -4 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[node name="Boko" type="KinematicBody2D" groups=["Monster"]]
+scale = Vector2( 5, 5 )
+collision_layer = 2
+collision_mask = 7
+script = ExtResource( 2 )
+START_STATE = NodePath("States/Idle")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, 2 )
+shape = SubResource( 1 )
+
+[node name="Hitbox" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
+collision_mask = 5
+script = ExtResource( 26 )
+
+[node name="Collision" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( 0, 0.5 )
+shape = ExtResource( 30 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Components" parent="." instance=ExtResource( 37 )]
+
+[node name="Push_Objects" parent="Components" instance=ExtResource( 36 )]
+
+[node name="Grounded" parent="Components" instance=ExtResource( 39 )]
+
+[node name="Can_Drown" parent="Components" instance=ExtResource( 38 )]
+
+[node name="Cartable" parent="Components" instance=ExtResource( 28 )]
+
+[node name="Dance" parent="Components" instance=ExtResource( 33 )]
+
+[node name="Sprite_Handler" parent="." instance=ExtResource( 7 )]
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+material = ExtResource( 20 )
+frames = ExtResource( 1 )
+script = ExtResource( 12 )
+
+[node name="Eyes" type="Sprite" parent="Sprite"]
+visible = false
+material = ExtResource( 20 )
+texture = ExtResource( 15 )
+script = ExtResource( 16 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Slash_Effect" type="AnimatedSprite" parent="Sprite" groups=["No_Flash"]]
+visible = false
+z_index = 50
+z_as_relative = false
+frames = ExtResource( 6 )
+frame = 9
+
+[node name="Slash_Animation" type="AnimationPlayer" parent="Sprite/Slash_Effect"]
+anims/Slash_Left = ExtResource( 25 )
+anims/Slash_Right = ExtResource( 24 )
+
+[node name="Slash_Hitbox" type="Area2D" parent="Sprite/Slash_Effect" groups=["Monster_Hitbox"]]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource( 11 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Slash_Effect/Slash_Hitbox"]
+scale = Vector2( 0.392614, 0.525361 )
+shape = SubResource( 8 )
+disabled = true
+
+[node name="Animation" type="AnimationPlayer" parent="Sprite"]
+anims/Death_Launch_Left = ExtResource( 23 )
+anims/Death_Launch_Right = ExtResource( 17 )
+anims/Death_Left = ExtResource( 19 )
+anims/Death_Right = ExtResource( 18 )
+anims/Hit = ExtResource( 27 )
+anims/Idle = SubResource( 10 )
+anims/Jump = SubResource( 12 )
+anims/Move = ExtResource( 22 )
+anims/RESET = SubResource( 13 )
+
+[node name="Hat" parent="Sprite" instance=ExtResource( 31 )]
+
+[node name="States" type="Node" parent="."]
+
+[node name="Idle" type="Node" parent="States"]
+script = ExtResource( 4 )
+
+[node name="Move" type="Node" parent="States"]
+script = ExtResource( 3 )
+MAX_MOVESPEED = 100.0
+
+[node name="AI_Run" parent="States" instance=ExtResource( 10 )]
+
+[node name="Attack" type="Node" parent="States"]
+script = ExtResource( 5 )
+attack_animations = {
+"left": ExtResource( 25 ),
+"right": ExtResource( 24 )
+}
+
+[node name="Cooldown_Timer" type="Timer" parent="States/Attack"]
+wait_time = 0.1
+one_shot = true
+
+[node name="Hit" type="Node" parent="States"]
+script = ExtResource( 8 )
+
+[node name="Cooldown" type="Timer" parent="States/Hit"]
+wait_time = 0.5
+one_shot = true
+
+[node name="Die" type="Node" parent="States"]
+script = ExtResource( 14 )
+DROP_WEAPON = true
+DROP_WEAPON_TEXTURE = ExtResource( 21 )
+
+[node name="UI" parent="." instance=ExtResource( 9 )]
+
+[node name="Effects" parent="." instance=ExtResource( 13 )]
+
+[node name="Target_Point" parent="." instance=ExtResource( 29 )]
+
+[connection signal="animation_finished" from="Sprite/Slash_Effect/Slash_Animation" to="States/Attack" method="_on_Slash_Animation_animation_finished"]
+[connection signal="animation_finished" from="Sprite/Animation" to="." method="_on_animation_finished"]
+[connection signal="timeout" from="States/Attack/Cooldown_Timer" to="States/Attack" method="_on_Cooldown_Timer_timeout"]
+[connection signal="timeout" from="States/Hit/Cooldown" to="States/Hit" method="_on_Cooldown_timeout"]

@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Hero/Trail.gd" type="Script" id=1]
+[ext_resource path="res://Hero/Trail_Width_Curve.tres" type="Curve" id=2]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.623529, 1 )
+colors = PoolColorArray( 0.196078, 0.160784, 0.278431, 0, 0.196078, 0.160784, 0.278431, 0.796078, 0.196078, 0.160784, 0.278431, 1 )
+
+[node name="Trail" type="Line2D"]
+width = 2.0
+width_curve = ExtResource( 2 )
+gradient = SubResource( 1 )
+script = ExtResource( 1 )
+hide_at_start = true
+length = 15

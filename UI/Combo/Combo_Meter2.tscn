@@ -1,0 +1,255 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://UI/Combo/Combo_meter_blank_fill.png" type="Texture" id=2]
+[ext_resource path="res://UI/Combo/Combo_meter_fill3.png" type="Texture" id=3]
+[ext_resource path="res://UI/Combo/Meter.gd" type="Script" id=4]
+[ext_resource path="res://UI/Combo/Combo_Meter_Stats.gd" type="Script" id=5]
+[ext_resource path="res://UI/Combo/Time_Meter.gd" type="Script" id=6]
+[ext_resource path="res://UI/Combo/Skull_icon.png" type="Texture" id=7]
+[ext_resource path="res://UI/Combo/Progress_Number.gd" type="Script" id=9]
+[ext_resource path="res://UI/Combo/Combo_Num.gd" type="Script" id=10]
+[ext_resource path="res://Shaders/Shake.tres" type="Material" id=11]
+[ext_resource path="res://UI/HUD/Combo_Bar_Number_Font.tres" type="DynamicFont" id=12]
+[ext_resource path="res://UI/Combo/Combo_meter_border_over.png" type="Texture" id=14]
+
+[sub_resource type="Gradient" id=25]
+offsets = PoolRealArray( 0, 0.295844, 0.665037, 1 )
+colors = PoolColorArray( 0.94902, 0.65098, 0.368627, 1, 1, 0.894118, 0.470588, 1, 1, 0.894118, 0.470588, 1, 1, 0.894118, 0.470588, 0 )
+
+[sub_resource type="GradientTexture" id=13]
+gradient = SubResource( 25 )
+
+[sub_resource type="Curve" id=14]
+_data = [ Vector2( 0, 0.173502 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=15]
+curve = SubResource( 14 )
+
+[sub_resource type="ParticlesMaterial" id=64]
+emission_shape = 2
+emission_box_extents = Vector3( 2.5, 0, 0 )
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 40, 0 )
+angular_velocity = 125.48
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+radial_accel = -5.0
+damping = 20.33
+damping_random = 0.45
+scale = 2.0
+scale_curve = SubResource( 15 )
+color_ramp = SubResource( 13 )
+hue_variation = 0.17
+hue_variation_random = 0.41
+
+[sub_resource type="Animation" id=65]
+resource_name = "Fade"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.08, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.4, 0.4 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=63]
+resource_name = "Pop"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.2, 0.2 ), Vector2( 0.3, 0.3 ), Vector2( 0.2, 0.2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="Combo_Meter" type="CanvasLayer"]
+script = ExtResource( 5 )
+
+[node name="Meter" type="TextureProgress" parent="."]
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 23.0
+margin_bottom = -534.0
+rect_scale = Vector2( 5, 5 )
+value = 50.0
+rounded = true
+allow_greater = true
+texture_under = ExtResource( 2 )
+texture_over = ExtResource( 14 )
+texture_progress = ExtResource( 3 )
+fill_mode = 3
+tint_under = Color( 1, 1, 1, 0.501961 )
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 4
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Shadow" type="ColorRect" parent="Meter"]
+visible = false
+show_behind_parent = true
+anchor_bottom = 1.0
+margin_top = 29.0
+margin_right = 12.0
+margin_bottom = 1.0
+rect_scale = Vector2( 0.5, 1 )
+color = Color( 0, 0, 0, 0.517647 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween1" type="Tween" parent="Meter"]
+
+[node name="Tween2" type="Tween" parent="Meter"]
+
+[node name="Skull_Icon" type="Sprite" parent="Meter"]
+position = Vector2( 6.4, 3.2 )
+texture = ExtResource( 7 )
+
+[node name="Time_Meter" type="TextureProgress" parent="Meter"]
+anchor_bottom = 1.0
+margin_left = 12.32
+margin_top = 2.0
+margin_right = 18.32
+margin_bottom = -2.0
+rounded = true
+allow_greater = true
+texture_under = ExtResource( 2 )
+texture_over = ExtResource( 14 )
+texture_progress = ExtResource( 3 )
+fill_mode = 3
+tint_under = Color( 1, 1, 1, 0.501961 )
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 4
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Shadow" type="ColorRect" parent="Meter/Time_Meter"]
+visible = false
+show_behind_parent = true
+anchor_bottom = 1.0
+margin_top = 29.0
+margin_right = 12.0
+margin_bottom = 1.0
+rect_scale = Vector2( 0.5, 1 )
+color = Color( 0, 0, 0, 0.517647 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween1" type="Tween" parent="Meter/Time_Meter"]
+
+[node name="Tween2" type="Tween" parent="Meter/Time_Meter"]
+
+[node name="Progress_Number" type="ColorRect" parent="Meter"]
+margin_left = 11.2
+margin_top = 53.2
+margin_right = 13.7
+margin_bottom = 53.7
+rect_min_size = Vector2( 2.5, 0.5 )
+rect_scale = Vector2( 2, 2 )
+color = Color( 0.258824, 0.141176, 0.270588, 1 )
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Meter/Progress_Number"]
+margin_left = 2.81016
+margin_top = -1.41692
+margin_right = 24.8102
+margin_bottom = 15.5831
+rect_scale = Vector2( 0.2, 0.2 )
+custom_colors/font_color = Color( 1, 1, 0.921569, 1 )
+custom_fonts/font = ExtResource( 12 )
+text = "22"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Particles" type="Particles2D" parent="Meter/Progress_Number"]
+position = Vector2( -2, 0 )
+emitting = false
+amount = 16
+lifetime = 0.8
+process_material = SubResource( 64 )
+
+[node name="Combo_Num" type="Label" parent="Meter"]
+material = ExtResource( 11 )
+margin_left = -5.0
+margin_top = 46.0
+margin_right = 19.0
+margin_bottom = 63.0
+rect_min_size = Vector2( 8, 8 )
+rect_scale = Vector2( 0.4, 0.4 )
+rect_pivot_offset = Vector2( 12, 8.5 )
+custom_colors/font_color = Color( 1, 1, 0.921569, 1 )
+custom_fonts/font = ExtResource( 12 )
+text = "x2"
+align = 1
+valign = 1
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Animation" type="AnimationPlayer" parent="Meter/Combo_Num"]
+anims/Fade = SubResource( 65 )
+anims/Pop = SubResource( 63 )
+
+[connection signal="meter_hit" from="Meter" to="Meter/Progress_Number" method="_on_Meter_meter_hit"]
+[connection signal="tween_all_completed" from="Meter/Tween1" to="Meter" method="_on_Tween1_tween_all_completed"]
+[connection signal="tween_all_completed" from="Meter/Tween2" to="Meter" method="_on_Tween2_tween_all_completed"]
+[connection signal="value_changed" from="Meter/Time_Meter" to="Meter/Time_Meter" method="_on_Time_Meter_value_changed"]
+[connection signal="tween_all_completed" from="Meter/Time_Meter/Tween1" to="Meter/Time_Meter" method="_on_Tween1_tween_all_completed"]
+[connection signal="tween_all_completed" from="Meter/Time_Meter/Tween2" to="Meter/Time_Meter" method="_on_Tween2_tween_all_completed"]

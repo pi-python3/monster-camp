@@ -1,0 +1,466 @@
+[gd_scene load_steps=49 format=2]
+
+[ext_resource path="res://Enemies/Drillgi/Drillgi.png" type="Texture" id=1]
+[ext_resource path="res://Enemies/State_Machine.gd" type="Script" id=2]
+[ext_resource path="res://Enemies/Boko/Move.gd" type="Script" id=3]
+[ext_resource path="res://Enemies/Boko/Idle.gd" type="Script" id=4]
+[ext_resource path="res://Enemies/Drillgi/Attack.gd" type="Script" id=5]
+[ext_resource path="res://Enemies/Slash_Effect_Frames.tres" type="SpriteFrames" id=6]
+[ext_resource path="res://Helpers/Sprite_Handler.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Enemies/Hit.gd" type="Script" id=8]
+[ext_resource path="res://Enemies/Stamina_Bar_Frames.tres" type="SpriteFrames" id=9]
+[ext_resource path="res://Enemies/Stamina_Bar.gd" type="Script" id=10]
+[ext_resource path="res://Enemies/Boko/Slash_Hitbox.gd" type="Script" id=11]
+[ext_resource path="res://Enemies/Hearts.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Enemies/Sprite.gd" type="Script" id=13]
+[ext_resource path="res://Enemies/Die.gd" type="Script" id=14]
+[ext_resource path="res://Enemies/Peapo/peapo_eye.png" type="Texture" id=15]
+[ext_resource path="res://Enemies/Keesee/Eyes.gd" type="Script" id=16]
+[ext_resource path="res://Enemies/AI_Move.gd" type="Script" id=17]
+[ext_resource path="res://Enemies/Death_Right.tres" type="Animation" id=18]
+[ext_resource path="res://Enemies/Death_Left.tres" type="Animation" id=19]
+[ext_resource path="res://Enemies/Hat.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Enemies/Shadow.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Enemies/Hit_Particles.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Hero/Trail.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Enemies/Components/Component_Manager.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Enemies/Components/Component_Flying.tscn" type="PackedScene" id=27]
+[ext_resource path="res://Enemies/Components/Component_Dance.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Enemies/Stamina_Fill_Anim.tres" type="Animation" id=29]
+[ext_resource path="res://Enemies/Drillgi/Burrow.gd" type="Script" id=30]
+[ext_resource path="res://Enemies/Components/Component_AI_Follow.tscn" type="PackedScene" id=31]
+[ext_resource path="res://Enemies/Stamina_Bar.tscn" type="PackedScene" id=32]
+
+[sub_resource type="RectangleShape2D" id=26]
+extents = Vector2( 1.47088, 1.96795 )
+
+[sub_resource type="RectangleShape2D" id=27]
+extents = Vector2( 1.5, 3.5 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 3, 7 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 1 )
+region = Rect2( 3, 0, 3, 7 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 1 )
+region = Rect2( 6, 0, 3, 7 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 1 )
+region = Rect2( 9, 0, 3, 7 )
+
+[sub_resource type="SpriteFrames" id=25]
+animations = [ {
+"frames": [ SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 15 )
+region = Rect2( 0, 0, 8, 8 )
+
+[sub_resource type="SpriteFrames" id=29]
+animations = [ {
+"frames": [ SubResource( 28 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=8]
+length = 0.2
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Slash_Hitbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Slash_Hitbox/Slash_Effect2:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.175 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 8 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("..:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.05, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -3.2 ), Vector2( 0, -4 ), Vector2( 0, 3 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Slash_Hitbox/Slash_Effect2:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="CircleShape2D" id=31]
+radius = 5.02086
+
+[sub_resource type="Animation" id=10]
+length = 0.2
+tracks/0/type = "method"
+tracks/0/path = NodePath("../Sprite_Handler")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "flash_on"
+}, {
+"args": [  ],
+"method": "flash_off"
+} ]
+}
+
+[sub_resource type="Animation" id=11]
+length = 0.5
+tracks/0/type = "method"
+tracks/0/path = NodePath("../Shadow")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "grow_shrink"
+} ]
+}
+
+[sub_resource type="Animation" id=12]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 10.0, 0.0, -10.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=30]
+resource_name = "Surface"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 180.0, 180.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.35, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -0.5, 3 ), Vector2( -0.5, -5 ), Vector2( 4, 2 ), Vector2( 0.5, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Slash_Effect/Slash_Hitbox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="Animation" id=13]
+length = 2.0
+step = 0.18
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 9 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.62, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1.3, 1.3 ) ]
+}
+
+[sub_resource type="Curve" id=19]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.698198 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=20]
+colors = PoolColorArray( 0.133333, 0.12549, 0.203922, 0.196078, 0.133333, 0.12549, 0.203922, 0.909804 )
+
+[node name="Drillgi" type="KinematicBody2D" groups=["Monster", "Z_Axis_Attacker"]]
+scale = Vector2( 5, 5 )
+collision_layer = 2
+collision_mask = 23
+script = ExtResource( 2 )
+START_STATE = NodePath("States/Idle")
+monster_type = "drillgi"
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0.0285168, 0.0145556 )
+shape = SubResource( 26 )
+
+[node name="Hitbox" type="Area2D" parent="."]
+visible = false
+position = Vector2( 1.00573, -1.2765 )
+collision_layer = 2
+collision_mask = 5
+
+[node name="Collision" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( -1, 0.837 )
+shape = SubResource( 27 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Components" parent="." instance=ExtResource( 26 )]
+
+[node name="Flying" parent="Components" instance=ExtResource( 27 )]
+
+[node name="Dance" parent="Components" instance=ExtResource( 28 )]
+dance_anim_type = 1
+
+[node name="AI_Follow" parent="Components" instance=ExtResource( 31 )]
+FOLLOW_SOUND_NAME = "Weird.wav"
+
+[node name="Sprite_Handler" parent="." instance=ExtResource( 7 )]
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0.5, 0 )
+frames = SubResource( 25 )
+speed_scale = 4.0
+playing = true
+script = ExtResource( 13 )
+
+[node name="Eyes" type="AnimatedSprite" parent="Sprite"]
+position = Vector2( 0, 1 )
+frames = SubResource( 29 )
+script = ExtResource( 16 )
+
+[node name="Slash_Effect" type="AnimatedSprite" parent="Sprite" groups=["No_Flash"]]
+visible = false
+self_modulate = Color( 1, 1, 1, 0 )
+z_index = 50
+z_as_relative = false
+frames = ExtResource( 6 )
+animation = "Double"
+frame = 2
+speed_scale = 4.0
+
+[node name="Slash_Animation" type="AnimationPlayer" parent="Sprite/Slash_Effect"]
+anims/Slash = SubResource( 8 )
+
+[node name="Slash_Hitbox" type="Area2D" parent="Sprite/Slash_Effect" groups=["Monster_Hitbox"]]
+position = Vector2( -0.5, 0 )
+rotation = 1.5708
+collision_layer = 2
+collision_mask = 5
+script = ExtResource( 11 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Slash_Effect/Slash_Hitbox"]
+visible = false
+shape = SubResource( 31 )
+disabled = true
+
+[node name="Slash_Effect2" type="AnimatedSprite" parent="Sprite/Slash_Effect/Slash_Hitbox" groups=["No_Flash"]]
+position = Vector2( -4, 0 )
+z_index = 50
+z_as_relative = false
+frames = ExtResource( 6 )
+animation = "Double"
+frame = 8
+speed_scale = 4.0
+offset = Vector2( 2, 0 )
+
+[node name="Animation" type="AnimationPlayer" parent="Sprite"]
+anims/Death_Left = ExtResource( 19 )
+anims/Death_Right = ExtResource( 18 )
+anims/Hit = SubResource( 10 )
+anims/Idle = SubResource( 11 )
+anims/Move = SubResource( 12 )
+anims/Surface = SubResource( 30 )
+
+[node name="Hat" parent="Sprite" instance=ExtResource( 20 )]
+position = Vector2( -0.5, -4 )
+frame = 1
+speed_scale = 1.3
+playing = true
+
+[node name="Stamina_Bar" parent="." instance=ExtResource( 32 )]
+attack_recharge = 3.2
+
+[node name="Stamina_Bar2" type="AnimatedSprite" parent="." groups=["No_Flash"]]
+position = Vector2( 0, 6 )
+frames = ExtResource( 9 )
+frame = 2
+script = ExtResource( 10 )
+
+[node name="Bar_Animation" type="AnimationPlayer" parent="Stamina_Bar2"]
+anims/Fill = SubResource( 13 )
+anims/Stamina_Fill_Anim = ExtResource( 29 )
+
+[node name="Hearts" parent="." instance=ExtResource( 12 )]
+
+[node name="Shadow" parent="." instance=ExtResource( 21 )]
+position = Vector2( 0, 7.5 )
+
+[node name="Hit_Particles" parent="." instance=ExtResource( 22 )]
+
+[node name="Trail" parent="." instance=ExtResource( 25 )]
+position = Vector2( 0.5, 0 )
+z_index = -1
+width = 2.0
+width_curve = SubResource( 19 )
+gradient = SubResource( 20 )
+hide_at_start = true
+target_path = NodePath("..")
+
+[node name="States" type="Node" parent="."]
+
+[node name="Idle" type="Node" parent="States"]
+script = ExtResource( 4 )
+
+[node name="Move" type="Node" parent="States"]
+script = ExtResource( 3 )
+MAX_MOVESPEED = 120.0
+
+[node name="AI_Move" type="KinematicBody2D" parent="States"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource( 17 )
+
+[node name="Seek_Collision_Mask" type="Area2D" parent="States/AI_Move"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="Run_Cooldown" type="Timer" parent="States/AI_Move"]
+wait_time = 4.0
+one_shot = true
+
+[node name="Attack" type="Node" parent="States"]
+script = ExtResource( 5 )
+
+[node name="Cooldown_Timer" type="Timer" parent="States/Attack"]
+wait_time = 0.1
+one_shot = true
+
+[node name="Hit" type="Node" parent="States"]
+script = ExtResource( 8 )
+
+[node name="Cooldown" type="Timer" parent="States/Hit"]
+wait_time = 0.5
+one_shot = true
+
+[node name="Die" type="Node" parent="States"]
+script = ExtResource( 14 )
+
+[node name="Burrow" type="Node" parent="States"]
+script = ExtResource( 30 )
+MAX_MOVESPEED = 170.0
+
+[node name="Burrow_Timer" type="Timer" parent="States/Burrow"]
+wait_time = 1.5
+one_shot = true
+
+[connection signal="hit" from="." to="Hearts" method="_on_Monster_hit"]
+[connection signal="animation_finished" from="Sprite/Slash_Effect/Slash_Animation" to="States/Attack" method="_on_Slash_Animation_animation_finished"]
+[connection signal="animation_finished" from="Sprite/Animation" to="." method="_on_animation_finished"]
+[connection signal="animation_finished" from="Sprite/Animation" to="States/Burrow" method="_on_Animation_animation_finished"]
+[connection signal="animation_finished" from="Stamina_Bar2/Bar_Animation" to="Stamina_Bar2" method="_on_Bar_Animation_animation_finished"]
+[connection signal="timeout" from="States/AI_Move/Run_Cooldown" to="States/AI_Move" method="_on_Run_Cooldown_timeout"]
+[connection signal="timeout" from="States/Attack/Cooldown_Timer" to="States/Attack" method="_on_Cooldown_Timer_timeout"]
+[connection signal="timeout" from="States/Hit/Cooldown" to="States/Hit" method="_on_Cooldown_timeout"]
+[connection signal="timeout" from="States/Burrow/Burrow_Timer" to="States/Burrow" method="_on_Burrow_Timer_timeout"]

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Helpers/Target_Point.gd" type="Script" id=1]
+[ext_resource path="res://Helpers/Target_Point_Icon_sheet.png" type="Texture" id=2]
+
+[node name="Target_Point" type="Position2D" groups=["Target_Point"]]
+visible = false
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="." groups=["No_Flash"]]
+scale = Vector2( 0.25, 0.25 )
+z_index = 100
+z_as_relative = false
+texture = ExtResource( 2 )
+hframes = 2

@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1.96879, 1.29182 )
+
+[node name="Foot_Hitbox" type="Area2D"]
+visible = false
+collision_layer = 0
+collision_mask = 64
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 3 )
+shape = SubResource( 1 )
+__meta__ = {
+"_editor_description_": ""
+}

@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Terrain/Navigation_Tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://Helpers/Navigation_Tiles.gd" type="Script" id=2]
+
+[node name="Navigation_Tiles" type="TileMap"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+scale = Vector2( 5, 5 )
+z_index = -100
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_quadrant_size = 4
+cell_custom_transform = Transform2D( 0, 0, 0, 0, 0, 0 )
+collision_layer = 32
+collision_mask = 0
+format = 1
+script = ExtResource( 2 )
+
+[node name="Calculate_Wait" type="Timer" parent="."]
+autostart = true
+
+[connection signal="visibility_changed" from="." to="." method="_on_Navigation_Tiles_visibility_changed"]
+[connection signal="timeout" from="Calculate_Wait" to="." method="_on_Calculate_Wait_timeout"]

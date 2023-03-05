@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://UI/HUD/Hat_Alert.gd" type="Script" id=1]
+[ext_resource path="res://UI/HUD/Panel_Heading_Text.tres" type="DynamicFont" id=2]
+[ext_resource path="res://UI/HUD/Pause_Panel_Texture.tres" type="StyleBox" id=3]
+
+[sub_resource type="Animation" id=12]
+resource_name = "Slide_Down"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 40, -80 ), Vector2( 40, 10 ) ]
+}
+
+[node name="Hat_Alert" type="PopupPanel"]
+visible = true
+anchor_right = 1.0
+margin_left = 40.0
+margin_top = 10.0
+margin_right = -40.0
+margin_bottom = 91.0
+custom_styles/panel = ExtResource( 3 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CenterContainer"]
+margin_left = 82.0
+margin_right = 557.0
+margin_bottom = 41.0
+custom_colors/font_color = Color( 1, 0.894118, 0.470588, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "Hat Mode unlocked!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Slide_Down = SubResource( 12 )
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

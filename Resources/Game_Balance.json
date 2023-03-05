@@ -1,0 +1,83 @@
+#MONSTERS
+{
+	"type": "monsters",
+	"monsters":
+	[
+		{
+			"name": "boko",
+			"health": 3,
+			"damage": 2
+		},
+		{
+			"name": "skele",
+			"health": 6,
+			"damage": 3
+		},
+		{
+			"name": "octo",
+			"health": 2,
+			"damage": 1
+		}
+	]
+}
+
+
+#HERO STATS
+{
+	"health":
+		[
+			{
+				"level": 1,
+				"health": 8
+			},
+			{
+				"level": 2,
+				"health": 12
+			},
+			{
+				"level": 3,
+				"health": 16
+			}
+		],
+	"stamina":
+		[
+			{
+				"level": 1,
+				"stamina": 2
+			},
+			{
+				"level": 2,
+				"stamina": 3
+			},
+			{
+				"level": 3,
+				"stamina": 4
+			}
+		]
+}
+
+#HERO EQUIPMENT
+{
+	"name": "sword",
+	"damage": 1
+}
+
+{
+	"name": "strong sword",
+	"damage": 2
+}
+
+{
+	"name": "strongest sword",
+	"damage": 3
+}
+
+{
+	"name": "bow",
+	"damage": 2
+}
+
+{
+	"name": "strong bow",
+	"damage": 3
+}

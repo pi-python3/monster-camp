@@ -1,0 +1,612 @@
+[gd_scene load_steps=53 format=2]
+
+[ext_resource path="res://UI/Combo/Combo_meter_border_over.png" type="Texture" id=1]
+[ext_resource path="res://UI/Combo/Combo_meter_blank_fill.png" type="Texture" id=2]
+[ext_resource path="res://UI/HUD/Switch_button.png" type="Texture" id=3]
+[ext_resource path="res://UI/HUD/Joystick.png" type="Texture" id=4]
+[ext_resource path="res://UI/HUD/Resume_Button.gd" type="Script" id=5]
+[ext_resource path="res://UI/HUD/Joystick_area.png" type="Texture" id=6]
+[ext_resource path="res://UI/Combo/Combo_meter_fill3.png" type="Texture" id=7]
+[ext_resource path="res://Shaders/Squish.tres" type="Material" id=8]
+[ext_resource path="res://UI/Menu_Buttons/Music_on_button.png" type="Texture" id=10]
+[ext_resource path="res://UI/Menu_Buttons/Music_off_button.png" type="Texture" id=11]
+[ext_resource path="res://UI/Menu_Buttons/Play_light.png" type="Texture" id=14]
+[ext_resource path="res://UI/Menu_Buttons/Play.png" type="Texture" id=15]
+[ext_resource path="res://UI/Menu_Theme.tres" type="Theme" id=16]
+[ext_resource path="res://UI/HUD/Pause_Panel_Texture.tres" type="StyleBox" id=17]
+[ext_resource path="res://UI/Menu_Buttons/Music_on_button_light.png" type="Texture" id=18]
+[ext_resource path="res://UI/Menu_Buttons/Music_off_button_light.png" type="Texture" id=19]
+[ext_resource path="res://UI/HUD/Panel_Heading_Text.tres" type="DynamicFont" id=22]
+[ext_resource path="res://UI/Combo/Meter.gd" type="Script" id=23]
+[ext_resource path="res://UI/Combo/Combo_Meter_Stats.gd" type="Script" id=24]
+[ext_resource path="res://UI/HUD/Touch_Screen_Buttons.gd" type="Script" id=25]
+[ext_resource path="res://UI/Combo/Time_Meter.gd" type="Script" id=27]
+[ext_resource path="res://UI/Combo/Skull_icon.png" type="Texture" id=28]
+[ext_resource path="res://UI/Combo/Progress_Number.gd" type="Script" id=29]
+[ext_resource path="res://UI/Combo/Combo_Num.gd" type="Script" id=30]
+[ext_resource path="res://Shaders/Shake.tres" type="Material" id=31]
+[ext_resource path="res://UI/HUD/Combo_Bar_Number_Font.tres" type="DynamicFont" id=32]
+[ext_resource path="res://UI/HUD/HUD.gd" type="Script" id=33]
+[ext_resource path="res://UI/HUD/Attack_button.png" type="Texture" id=34]
+[ext_resource path="res://UI/Menu_Buttons/Pause_Button.tscn" type="PackedScene" id=36]
+[ext_resource path="res://UI/Level_State_Text.tscn" type="PackedScene" id=37]
+[ext_resource path="res://UI/HUD/Skull_chest_icon_large.png" type="Texture" id=38]
+[ext_resource path="res://UI/Menu_Buttons/Restart_button.png" type="Texture" id=40]
+[ext_resource path="res://UI/HUD/Joystick.gd" type="Script" id=41]
+[ext_resource path="res://UI/Menu_Buttons/Menu_Button.tscn" type="PackedScene" id=42]
+[ext_resource path="res://UI/Menu_Buttons/Home_button_light.png" type="Texture" id=43]
+[ext_resource path="res://UI/Menu_Buttons/Restart_button_light.png" type="Texture" id=44]
+[ext_resource path="res://UI/HUD/Hat_Alert.gd" type="Script" id=45]
+[ext_resource path="res://UI/Menu_Buttons/Home_button.png" type="Texture" id=46]
+[ext_resource path="res://UI/Menu_Buttons/Toggle_Button.tscn" type="PackedScene" id=47]
+
+[sub_resource type="Gradient" id=25]
+offsets = PoolRealArray( 0, 0.295844, 0.665037, 1 )
+colors = PoolColorArray( 0.94902, 0.65098, 0.368627, 1, 1, 0.894118, 0.470588, 1, 1, 0.894118, 0.470588, 1, 1, 0.894118, 0.470588, 0 )
+
+[sub_resource type="GradientTexture" id=13]
+gradient = SubResource( 25 )
+
+[sub_resource type="Curve" id=14]
+_data = [ Vector2( 0, 0.173502 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=15]
+curve = SubResource( 14 )
+
+[sub_resource type="ParticlesMaterial" id=64]
+emission_shape = 2
+emission_box_extents = Vector3( 2.5, 0, 0 )
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 40, 0 )
+angular_velocity = 125.48
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+radial_accel = -5.0
+damping = 20.33
+damping_random = 0.45
+scale = 2.0
+scale_curve = SubResource( 15 )
+color_ramp = SubResource( 13 )
+hue_variation = 0.17
+hue_variation_random = 0.41
+
+[sub_resource type="Animation" id=65]
+resource_name = "Fade"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.08, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.4, 0.4 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=63]
+resource_name = "Pop"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.2, 0.2 ), Vector2( 0.3, 0.3 ), Vector2( 0.2, 0.2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "Hover"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 0.00112177 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 5 ), Vector2( 0, -5 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 5.0, -5.0, 0.0 ]
+}
+
+[sub_resource type="RectangleShape2D" id=68]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=69]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="CircleShape2D" id=20]
+radius = 9.0
+
+[sub_resource type="Animation" id=67]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "Slide_Down"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 40, -80 ), Vector2( 40, 10 ) ]
+}
+
+[node name="HUD" type="CanvasLayer"]
+layer = 2
+script = ExtResource( 33 )
+
+[node name="UI" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Combo_Meter" type="CanvasLayer" parent="UI"]
+script = ExtResource( 24 )
+
+[node name="Meter" type="TextureProgress" parent="UI/Combo_Meter"]
+visible = false
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 23.0
+margin_bottom = -534.0
+rect_scale = Vector2( 5, 5 )
+value = 50.0
+rounded = true
+allow_greater = true
+texture_under = ExtResource( 2 )
+texture_over = ExtResource( 1 )
+texture_progress = ExtResource( 7 )
+fill_mode = 3
+tint_under = Color( 1, 1, 1, 0.501961 )
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 4
+script = ExtResource( 23 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Shadow" type="ColorRect" parent="UI/Combo_Meter/Meter"]
+visible = false
+show_behind_parent = true
+anchor_bottom = 1.0
+margin_top = 29.0
+margin_right = 12.0
+margin_bottom = 1.0
+rect_scale = Vector2( 0.5, 1 )
+color = Color( 0, 0, 0, 0.517647 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween1" type="Tween" parent="UI/Combo_Meter/Meter"]
+
+[node name="Tween2" type="Tween" parent="UI/Combo_Meter/Meter"]
+
+[node name="Skull_Icon" type="Sprite" parent="UI/Combo_Meter/Meter"]
+position = Vector2( 6.4, 3.2 )
+texture = ExtResource( 28 )
+
+[node name="Time_Meter" type="TextureProgress" parent="UI/Combo_Meter/Meter"]
+anchor_bottom = 1.0
+margin_left = 12.32
+margin_top = 2.0
+margin_right = 18.32
+margin_bottom = -2.0
+rounded = true
+allow_greater = true
+texture_under = ExtResource( 2 )
+texture_over = ExtResource( 1 )
+texture_progress = ExtResource( 7 )
+fill_mode = 3
+tint_under = Color( 1, 1, 1, 0.501961 )
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 4
+script = ExtResource( 27 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Shadow" type="ColorRect" parent="UI/Combo_Meter/Meter/Time_Meter"]
+visible = false
+show_behind_parent = true
+anchor_bottom = 1.0
+margin_top = 29.0
+margin_right = 12.0
+margin_bottom = 1.0
+rect_scale = Vector2( 0.5, 1 )
+color = Color( 0, 0, 0, 0.517647 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween1" type="Tween" parent="UI/Combo_Meter/Meter/Time_Meter"]
+
+[node name="Tween2" type="Tween" parent="UI/Combo_Meter/Meter/Time_Meter"]
+
+[node name="Progress_Number" type="ColorRect" parent="UI/Combo_Meter/Meter"]
+margin_left = 11.2
+margin_top = 53.2
+margin_right = 13.7
+margin_bottom = 53.7
+rect_min_size = Vector2( 2.5, 0.5 )
+rect_scale = Vector2( 2, 2 )
+color = Color( 0.258824, 0.141176, 0.270588, 1 )
+script = ExtResource( 29 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/Combo_Meter/Meter/Progress_Number"]
+margin_left = 2.81016
+margin_top = -1.41692
+margin_right = 24.8102
+margin_bottom = 15.5831
+rect_scale = Vector2( 0.2, 0.2 )
+custom_colors/font_color = Color( 1, 1, 0.921569, 1 )
+custom_fonts/font = ExtResource( 32 )
+text = "22"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Particles" type="Particles2D" parent="UI/Combo_Meter/Meter/Progress_Number"]
+position = Vector2( -2, 0 )
+emitting = false
+amount = 16
+lifetime = 0.8
+process_material = SubResource( 64 )
+
+[node name="Combo_Num" type="Label" parent="UI/Combo_Meter/Meter"]
+material = ExtResource( 31 )
+margin_left = -5.0
+margin_top = 46.0
+margin_right = 19.0
+margin_bottom = 63.0
+rect_min_size = Vector2( 8, 8 )
+rect_scale = Vector2( 0.2, 0.2 )
+rect_pivot_offset = Vector2( 12, 8.5 )
+custom_colors/font_color = Color( 1, 1, 0.921569, 1 )
+custom_fonts/font = ExtResource( 32 )
+text = "x2"
+align = 1
+valign = 1
+script = ExtResource( 30 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Animation" type="AnimationPlayer" parent="UI/Combo_Meter/Meter/Combo_Num"]
+anims/Fade = SubResource( 65 )
+anims/Pop = SubResource( 63 )
+
+[node name="Pause_Button" parent="UI" instance=ExtResource( 36 )]
+margin_left = 620.0
+margin_top = 20.0
+margin_right = 660.0
+margin_bottom = 60.0
+
+[node name="CenterContainer" type="CenterContainer" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pause_Popup" type="PopupPanel" parent="UI/CenterContainer"]
+pause_mode = 2
+visible = true
+margin_left = 208.0
+margin_top = 149.0
+margin_right = 551.0
+margin_bottom = 450.0
+rect_pivot_offset = Vector2( -888, 51 )
+mouse_filter = 2
+custom_styles/panel = ExtResource( 17 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/CenterContainer/Pause_Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
+mouse_filter = 2
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/CenterContainer/Pause_Popup/VBoxContainer"]
+margin_right = 303.0
+margin_bottom = 41.0
+custom_colors/font_color = Color( 1, 0.894118, 0.470588, 1 )
+custom_fonts/font = ExtResource( 22 )
+text = "Game Paused"
+align = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/CenterContainer/Pause_Popup/VBoxContainer"]
+margin_top = 61.0
+margin_right = 303.0
+margin_bottom = 141.0
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/CenterContainer/Pause_Popup/VBoxContainer/CenterContainer"]
+margin_left = 61.0
+margin_right = 241.0
+margin_bottom = 80.0
+custom_constants/separation = 20
+
+[node name="Resume_Button" type="TextureButton" parent="UI/CenterContainer/Pause_Popup/VBoxContainer/CenterContainer/HBoxContainer"]
+pause_mode = 2
+material = ExtResource( 8 )
+margin_right = 80.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 80, 80 )
+rect_pivot_offset = Vector2( 40, 40 )
+hint_tooltip = "Resume"
+mouse_default_cursor_shape = 2
+theme = ExtResource( 16 )
+shortcut_in_tooltip = false
+texture_normal = ExtResource( 15 )
+texture_pressed = ExtResource( 15 )
+texture_hover = ExtResource( 14 )
+expand = true
+stretch_mode = 4
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/CenterContainer/Pause_Popup/VBoxContainer/CenterContainer/HBoxContainer/Resume_Button"]
+anims/Hover = SubResource( 10 )
+
+[node name="Menu_Button" parent="UI/CenterContainer/Pause_Popup/VBoxContainer/CenterContainer/HBoxContainer" instance=ExtResource( 42 )]
+margin_left = 100.0
+margin_top = 0.0
+margin_right = 180.0
+margin_bottom = 80.0
+texture_normal = ExtResource( 40 )
+texture_pressed = ExtResource( 40 )
+texture_hover = ExtResource( 44 )
+type = 4
+
+[node name="Control" type="Control" parent="UI/CenterContainer/Pause_Popup/VBoxContainer"]
+margin_top = 161.0
+margin_right = 303.0
+margin_bottom = 161.0
+
+[node name="CenterContainer2" type="CenterContainer" parent="UI/CenterContainer/Pause_Popup/VBoxContainer"]
+margin_top = 181.0
+margin_right = 303.0
+margin_bottom = 261.0
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/CenterContainer/Pause_Popup/VBoxContainer/CenterContainer2"]
+margin_left = 11.0
+margin_right = 291.0
+margin_bottom = 80.0
+mouse_filter = 2
+custom_constants/separation = 20
+
+[node name="Menu_Button" parent="UI/CenterContainer/Pause_Popup/VBoxContainer/CenterContainer2/HBoxContainer" instance=ExtResource( 42 )]
+margin_top = 0.0
+margin_bottom = 80.0
+hint_tooltip = "Home"
+texture_normal = ExtResource( 46 )
+texture_pressed = ExtResource( 46 )
+texture_hover = ExtResource( 43 )
+type = 3
+
+[node name="Toggle_Button" parent="UI/CenterContainer/Pause_Popup/VBoxContainer/CenterContainer2/HBoxContainer" instance=ExtResource( 47 )]
+margin_left = 100.0
+margin_top = 0.0
+margin_right = 180.0
+margin_bottom = 80.0
+hint_tooltip = "SFX on/off"
+
+[node name="Toggle_Button2" parent="UI/CenterContainer/Pause_Popup/VBoxContainer/CenterContainer2/HBoxContainer" instance=ExtResource( 47 )]
+margin_left = 200.0
+margin_top = 0.0
+margin_right = 280.0
+margin_bottom = 80.0
+hint_tooltip = "Music on/off"
+texture_normal = ExtResource( 10 )
+texture_pressed = ExtResource( 11 )
+texture_hover = ExtResource( 18 )
+type = 1
+on_hover_texture = ExtResource( 18 )
+off_hover_texture = ExtResource( 19 )
+
+[node name="Skull_Chest" type="Sprite" parent="UI/CenterContainer/Pause_Popup"]
+visible = false
+position = Vector2( 332, -20 )
+texture = ExtResource( 38 )
+centered = false
+
+[node name="TextureRect" type="ColorRect" parent="UI/CenterContainer/Pause_Popup/Skull_Chest"]
+show_behind_parent = true
+margin_left = -5.0
+margin_top = -5.0
+margin_right = 15.0
+margin_bottom = 15.0
+rect_scale = Vector2( 2.5, 2.5 )
+color = Color( 0.152941, 0.152941, 0.211765, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level_State_Text" parent="UI" instance=ExtResource( 37 )]
+visible = false
+mouse_filter = 2
+
+[node name="Touch_Screen_Buttons" type="Node2D" parent="."]
+pause_mode = 2
+visible = false
+modulate = Color( 1, 1, 1, 0.7 )
+script = ExtResource( 25 )
+
+[node name="Switch_Button" type="TouchScreenButton" parent="Touch_Screen_Buttons"]
+position = Vector2( 640, 440 )
+scale = Vector2( 7.5, 7.5 )
+normal = ExtResource( 3 )
+shape = SubResource( 68 )
+action = "switch"
+
+[node name="Attack_Button" type="TouchScreenButton" parent="Touch_Screen_Buttons"]
+position = Vector2( 480, 440 )
+scale = Vector2( 7.5, 7.5 )
+normal = ExtResource( 34 )
+shape = SubResource( 69 )
+action = "attack"
+
+[node name="Joystick" type="TouchScreenButton" parent="Touch_Screen_Buttons"]
+pause_mode = 2
+position = Vector2( 40, 400 )
+scale = Vector2( 10, 10 )
+normal = ExtResource( 6 )
+shape = SubResource( 20 )
+script = ExtResource( 41 )
+
+[node name="Inner_Circle" type="Sprite" parent="Touch_Screen_Buttons/Joystick"]
+pause_mode = 2
+texture = ExtResource( 4 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 5, 5 )
+
+[node name="Popups" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="Hat_Alert" type="PopupPanel" parent="Popups"]
+anchor_right = 1.0
+margin_right = 4480.0
+margin_bottom = 81.0
+custom_styles/panel = ExtResource( 17 )
+script = ExtResource( 45 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="Popups/Hat_Alert"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Popups/Hat_Alert/CenterContainer"]
+margin_left = 2362.0
+margin_right = 2837.0
+margin_bottom = 41.0
+custom_colors/font_color = Color( 1, 0.894118, 0.470588, 1 )
+custom_fonts/font = ExtResource( 22 )
+text = "Hat Mode unlocked!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="Popups/Hat_Alert"]
+wait_time = 4.0
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Popups/Hat_Alert"]
+anims/RESET = SubResource( 67 )
+anims/Slide_Down = SubResource( 12 )
+
+[connection signal="meter_hit" from="UI/Combo_Meter/Meter" to="UI/Combo_Meter/Meter/Progress_Number" method="_on_Meter_meter_hit"]
+[connection signal="tween_all_completed" from="UI/Combo_Meter/Meter/Tween1" to="UI/Combo_Meter/Meter" method="_on_Tween1_tween_all_completed"]
+[connection signal="tween_all_completed" from="UI/Combo_Meter/Meter/Tween2" to="UI/Combo_Meter/Meter" method="_on_Tween2_tween_all_completed"]
+[connection signal="value_changed" from="UI/Combo_Meter/Meter/Time_Meter" to="UI/Combo_Meter/Meter/Time_Meter" method="_on_Time_Meter_value_changed"]
+[connection signal="tween_all_completed" from="UI/Combo_Meter/Meter/Time_Meter/Tween1" to="UI/Combo_Meter/Meter/Time_Meter" method="_on_Tween1_tween_all_completed"]
+[connection signal="tween_all_completed" from="UI/Combo_Meter/Meter/Time_Meter/Tween2" to="UI/Combo_Meter/Meter/Time_Meter" method="_on_Tween2_tween_all_completed"]
+[connection signal="about_to_show" from="UI/CenterContainer/Pause_Popup" to="." method="_on_Pause_Popup_about_to_show"]
+[connection signal="popup_hide" from="UI/CenterContainer/Pause_Popup" to="." method="_on_Pause_Popup_popup_hide"]
+[connection signal="mouse_entered" from="UI/CenterContainer/Pause_Popup/VBoxContainer/CenterContainer/HBoxContainer/Resume_Button" to="UI/CenterContainer/Pause_Popup/VBoxContainer/CenterContainer/HBoxContainer/Resume_Button" method="_on_Menu_Button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/CenterContainer/Pause_Popup/VBoxContainer/CenterContainer/HBoxContainer/Resume_Button" to="UI/CenterContainer/Pause_Popup/VBoxContainer/CenterContainer/HBoxContainer/Resume_Button" method="_on_Menu_Button_mouse_exited"]
+[connection signal="pressed" from="UI/CenterContainer/Pause_Popup/VBoxContainer/CenterContainer/HBoxContainer/Resume_Button" to="UI/CenterContainer/Pause_Popup/VBoxContainer/CenterContainer/HBoxContainer/Resume_Button" method="_on_Resume_Button_pressed"]
+[connection signal="timeout" from="Popups/Hat_Alert/Timer" to="Popups/Hat_Alert" method="_on_Timer_timeout"]
+[connection signal="animation_finished" from="Popups/Hat_Alert/AnimationPlayer" to="Popups/Hat_Alert" method="_on_AnimationPlayer_animation_finished"]

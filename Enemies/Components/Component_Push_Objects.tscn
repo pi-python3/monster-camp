@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Enemies/Components/Push_Objects.gd" type="Script" id=1]
+
+[node name="Push_Objects" type="Node"]
+script = ExtResource( 1 )

@@ -1,0 +1,296 @@
+[gd_scene load_steps=35 format=2]
+
+[ext_resource path="res://UI/Menu_Buttons/Pause_Button.tscn" type="PackedScene" id=1]
+[ext_resource path="res://UI/Hero_Health.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI/HUD/Attack_button.png" type="Texture" id=3]
+[ext_resource path="res://UI/HUD/HUD.gd" type="Script" id=4]
+[ext_resource path="res://UI/Menu_Buttons/Play_light.png" type="Texture" id=5]
+[ext_resource path="res://UI/HUD/Panel_Heading_Text.tres" type="DynamicFont" id=6]
+[ext_resource path="res://UI/HUD/Pause_Panel_Texture.tres" type="StyleBox" id=7]
+[ext_resource path="res://Shaders/Squish.tres" type="Material" id=8]
+[ext_resource path="res://UI/Menu_Buttons/Play.png" type="Texture" id=9]
+[ext_resource path="res://UI/Menu_Theme.tres" type="Theme" id=10]
+[ext_resource path="res://UI/HUD/Resume_Button.gd" type="Script" id=11]
+[ext_resource path="res://UI/Menu_Buttons/Toggle_Button.tscn" type="PackedScene" id=12]
+[ext_resource path="res://UI/Menu_Buttons/Music_on_button.png" type="Texture" id=13]
+[ext_resource path="res://UI/Menu_Buttons/Music_on_button_light.png" type="Texture" id=14]
+[ext_resource path="res://UI/Menu_Buttons/Music_off_button_light.png" type="Texture" id=15]
+[ext_resource path="res://UI/Menu_Buttons/Music_off_button.png" type="Texture" id=16]
+[ext_resource path="res://UI/Menu_Buttons/Home_button.png" type="Texture" id=17]
+[ext_resource path="res://UI/Menu_Buttons/Menu_Button.tscn" type="PackedScene" id=18]
+[ext_resource path="res://UI/Menu_Buttons/Home_button_light.png" type="Texture" id=19]
+[ext_resource path="res://UI/Menu_Buttons/Restart_button_light.png" type="Texture" id=20]
+[ext_resource path="res://UI/HUD/Hat_Alert.tscn" type="PackedScene" id=21]
+[ext_resource path="res://UI/Menu_Buttons/Restart_button.png" type="Texture" id=22]
+[ext_resource path="res://UI/Level_State_Text.tscn" type="PackedScene" id=23]
+[ext_resource path="res://UI/HUD/Skull_chest_icon_large.png" type="Texture" id=24]
+[ext_resource path="res://UI/Combo/Combo_Meter2.tscn" type="PackedScene" id=25]
+[ext_resource path="res://UI/HUD/Switch_button.png" type="Texture" id=26]
+[ext_resource path="res://UI/HUD/Touch_Screen_Buttons.gd" type="Script" id=29]
+[ext_resource path="res://UI/HUD/Joystick_area.png" type="Texture" id=30]
+[ext_resource path="res://UI/HUD/Joystick.gd" type="Script" id=31]
+[ext_resource path="res://UI/HUD/Joystick.png" type="Texture" id=32]
+
+[sub_resource type="Animation" id=10]
+resource_name = "Hover"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 0.00112177 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 5 ), Vector2( 0, -5 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 5.0, -5.0, 0.0 ]
+}
+
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="CircleShape2D" id=20]
+radius = 9.0
+
+[node name="HUD" type="CanvasLayer"]
+layer = 2
+script = ExtResource( 4 )
+
+[node name="UI" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Combo_Meter" parent="UI" instance=ExtResource( 25 )]
+
+[node name="Pause_Button" parent="UI" instance=ExtResource( 1 )]
+margin_left = 620.0
+margin_top = 20.0
+margin_right = 660.0
+margin_bottom = 60.0
+
+[node name="CenterContainer" type="CenterContainer" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pause_Popup" type="PopupPanel" parent="UI/CenterContainer"]
+pause_mode = 2
+margin_left = 208.0
+margin_top = 149.0
+margin_right = 551.0
+margin_bottom = 450.0
+rect_pivot_offset = Vector2( -888, 51 )
+mouse_filter = 2
+custom_styles/panel = ExtResource( 7 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/CenterContainer/Pause_Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
+mouse_filter = 2
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/CenterContainer/Pause_Popup/VBoxContainer"]
+margin_right = 303.0
+margin_bottom = 41.0
+custom_colors/font_color = Color( 1, 0.894118, 0.470588, 1 )
+custom_fonts/font = ExtResource( 6 )
+text = "Game Paused"
+align = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/CenterContainer/Pause_Popup/VBoxContainer"]
+margin_top = 61.0
+margin_right = 303.0
+margin_bottom = 141.0
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/CenterContainer/Pause_Popup/VBoxContainer/CenterContainer"]
+margin_left = 61.0
+margin_right = 241.0
+margin_bottom = 80.0
+custom_constants/separation = 20
+
+[node name="Resume_Button" type="TextureButton" parent="UI/CenterContainer/Pause_Popup/VBoxContainer/CenterContainer/HBoxContainer"]
+pause_mode = 2
+material = ExtResource( 8 )
+margin_right = 80.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 80, 80 )
+rect_pivot_offset = Vector2( 40, 40 )
+hint_tooltip = "Resume"
+mouse_default_cursor_shape = 2
+theme = ExtResource( 10 )
+shortcut_in_tooltip = false
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 9 )
+texture_hover = ExtResource( 5 )
+expand = true
+stretch_mode = 4
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/CenterContainer/Pause_Popup/VBoxContainer/CenterContainer/HBoxContainer/Resume_Button"]
+anims/Hover = SubResource( 10 )
+
+[node name="Menu_Button" parent="UI/CenterContainer/Pause_Popup/VBoxContainer/CenterContainer/HBoxContainer" instance=ExtResource( 18 )]
+margin_left = 100.0
+margin_top = 0.0
+margin_right = 180.0
+margin_bottom = 80.0
+texture_normal = ExtResource( 22 )
+texture_pressed = ExtResource( 22 )
+texture_hover = ExtResource( 20 )
+type = 4
+
+[node name="Control" type="Control" parent="UI/CenterContainer/Pause_Popup/VBoxContainer"]
+margin_top = 161.0
+margin_right = 303.0
+margin_bottom = 161.0
+
+[node name="CenterContainer2" type="CenterContainer" parent="UI/CenterContainer/Pause_Popup/VBoxContainer"]
+margin_top = 181.0
+margin_right = 303.0
+margin_bottom = 261.0
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/CenterContainer/Pause_Popup/VBoxContainer/CenterContainer2"]
+margin_left = 11.0
+margin_right = 291.0
+margin_bottom = 80.0
+mouse_filter = 2
+custom_constants/separation = 20
+
+[node name="Menu_Button" parent="UI/CenterContainer/Pause_Popup/VBoxContainer/CenterContainer2/HBoxContainer" instance=ExtResource( 18 )]
+margin_top = 0.0
+margin_bottom = 80.0
+hint_tooltip = "Home"
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 17 )
+texture_hover = ExtResource( 19 )
+type = 3
+
+[node name="Toggle_Button" parent="UI/CenterContainer/Pause_Popup/VBoxContainer/CenterContainer2/HBoxContainer" instance=ExtResource( 12 )]
+margin_left = 100.0
+margin_top = 0.0
+margin_right = 180.0
+margin_bottom = 80.0
+hint_tooltip = "SFX on/off"
+
+[node name="Toggle_Button2" parent="UI/CenterContainer/Pause_Popup/VBoxContainer/CenterContainer2/HBoxContainer" instance=ExtResource( 12 )]
+margin_left = 200.0
+margin_top = 0.0
+margin_right = 280.0
+margin_bottom = 80.0
+hint_tooltip = "Music on/off"
+texture_normal = ExtResource( 13 )
+texture_pressed = ExtResource( 16 )
+texture_hover = ExtResource( 14 )
+type = 1
+on_hover_texture = ExtResource( 14 )
+off_hover_texture = ExtResource( 15 )
+
+[node name="Skull_Chest" type="Sprite" parent="UI/CenterContainer/Pause_Popup"]
+position = Vector2( 332, -20 )
+texture = ExtResource( 24 )
+centered = false
+
+[node name="TextureRect" type="ColorRect" parent="UI/CenterContainer/Pause_Popup/Skull_Chest"]
+show_behind_parent = true
+margin_left = -5.0
+margin_top = -5.0
+margin_right = 15.0
+margin_bottom = 15.0
+rect_scale = Vector2( 2.5, 2.5 )
+color = Color( 0.152941, 0.152941, 0.211765, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level_State_Text" parent="UI" instance=ExtResource( 23 )]
+visible = false
+mouse_filter = 2
+
+[node name="Hero_Health2" parent="." instance=ExtResource( 2 )]
+margin_left = -40.0
+margin_top = 40.0
+margin_right = -40.0
+margin_bottom = 40.0
+
+[node name="Touch_Screen_Buttons" type="Node2D" parent="."]
+pause_mode = 2
+visible = false
+modulate = Color( 1, 1, 1, 0.7 )
+script = ExtResource( 29 )
+
+[node name="Switch_Button" type="TouchScreenButton" parent="Touch_Screen_Buttons"]
+position = Vector2( 640, 440 )
+scale = Vector2( 7.5, 7.5 )
+normal = ExtResource( 26 )
+shape = SubResource( 13 )
+action = "switch"
+
+[node name="Attack_Button" type="TouchScreenButton" parent="Touch_Screen_Buttons"]
+position = Vector2( 480, 440 )
+scale = Vector2( 7.5, 7.5 )
+normal = ExtResource( 3 )
+shape = SubResource( 14 )
+action = "attack"
+
+[node name="Joystick" type="TouchScreenButton" parent="Touch_Screen_Buttons"]
+pause_mode = 2
+position = Vector2( 40, 400 )
+scale = Vector2( 10, 10 )
+normal = ExtResource( 30 )
+shape = SubResource( 20 )
+script = ExtResource( 31 )
+
+[node name="Inner_Circle" type="Sprite" parent="Touch_Screen_Buttons/Joystick"]
+pause_mode = 2
+texture = ExtResource( 32 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 5, 5 )
+
+[node name="Popups" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="Hat_Alert" parent="Popups" instance=ExtResource( 21 )]
+visible = false
+
+[connection signal="about_to_show" from="UI/CenterContainer/Pause_Popup" to="." method="_on_Pause_Popup_about_to_show"]
+[connection signal="popup_hide" from="UI/CenterContainer/Pause_Popup" to="." method="_on_Pause_Popup_popup_hide"]
+[connection signal="mouse_entered" from="UI/CenterContainer/Pause_Popup/VBoxContainer/CenterContainer/HBoxContainer/Resume_Button" to="UI/CenterContainer/Pause_Popup/VBoxContainer/CenterContainer/HBoxContainer/Resume_Button" method="_on_Menu_Button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/CenterContainer/Pause_Popup/VBoxContainer/CenterContainer/HBoxContainer/Resume_Button" to="UI/CenterContainer/Pause_Popup/VBoxContainer/CenterContainer/HBoxContainer/Resume_Button" method="_on_Menu_Button_mouse_exited"]
+[connection signal="pressed" from="UI/CenterContainer/Pause_Popup/VBoxContainer/CenterContainer/HBoxContainer/Resume_Button" to="UI/CenterContainer/Pause_Popup/VBoxContainer/CenterContainer/HBoxContainer/Resume_Button" method="_on_Resume_Button_pressed"]

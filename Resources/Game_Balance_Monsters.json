@@ -1,0 +1,60 @@
+{
+	"type": "monsters",
+	"monsters":
+	[
+		{
+			"name": "boko",
+			"health": 3,
+			"damage": 2,
+			"attack_recharge": 2.5
+		},
+		{
+			"name": "skele",
+			"health": 6,
+			"damage": 3,
+			"attack_recharge": 4
+		},
+		{
+			"name": "keesee",
+			"health": 2,
+			"damage": 1,
+			"attack_recharge": 2
+		},
+		{
+			"name": "peapo",
+			"health": 2,
+			"damage": 2,
+			"attack_recharge": 2.5
+		},
+		{
+			"name": "bombo",
+			"health": 1,
+			"damage": 3,
+			"attack_recharge": 1.7
+		},
+		{
+			"name": "drillgi",
+			"health": 3,
+			"damage": 2,
+			"attack_recharge": 3.2
+		},
+		{
+			"name": "lich",
+			"health": 10,
+			"damage": 3,
+			"attack_recharge": 1.5
+		},
+		{
+			"name": "norman_head",
+			"health": 12,
+			"damage": 3,
+			"attack_recharge": 6
+		},
+		{
+			"name": "norman_hand",
+			"health": 12,
+			"damage": 3,
+			"attack_recharge": 10
+		}
+	]
+}

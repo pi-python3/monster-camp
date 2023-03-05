@@ -1,0 +1,147 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Enemies/Lich/Fireball/Fireball_Light.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Enemies/Lich/Fireball/Lich_Fireball.gd" type="Script" id=2]
+[ext_resource path="res://Enemies/Lich/Fireball/Lich_fireball.png" type="Texture" id=3]
+[ext_resource path="res://Environment/Fire_Particles.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Environment/Smoke Particles.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Environment/Torch_Light_Color_Ramp.tres" type="Texture" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 0.8, 0.8 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 3 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 3 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ SubResource( 13 ), SubResource( 14 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=15]
+resource_name = "Explode"
+length = 0.48
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Fire_Particles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Smoke Particles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="CircleShape2D" id=11]
+radius = 4.0
+
+[sub_resource type="Curve" id=3]
+max_value = 0.2
+_data = [ Vector2( 0, 0.0016892 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.071509 ), 0.180028, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.34795 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=17]
+curve = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=18]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 15, 0 )
+initial_velocity = 30.0
+initial_velocity_random = 1.0
+angular_velocity = 317.89
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 10.0
+damping_random = 0.66
+scale = 1.2
+scale_random = 0.3
+scale_curve = SubResource( 17 )
+color = Color( 0.898039, 0.00392157, 1, 1 )
+color_ramp = ExtResource( 6 )
+hue_variation = 0.01
+hue_variation_random = 0.1
+hue_variation_curve = SubResource( 4 )
+
+[node name="Fireball" type="KinematicBody2D" groups=["Fireball"]]
+scale = Vector2( 5, 5 )
+collision_layer = 8
+collision_mask = 0
+script = ExtResource( 2 )
+speed = 300.0
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0.5, 0.5 )
+frames = SubResource( 6 )
+playing = true
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+anims/Explode = SubResource( 15 )
+
+[node name="Hitbox" type="Area2D" parent="." groups=["Projectile_Hitbox"]]
+visible = false
+collision_layer = 8
+collision_mask = 5
+
+[node name="Collision" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource( 11 )
+
+[node name="Fire_Particles" parent="." instance=ExtResource( 4 )]
+scale = Vector2( 1, 1 )
+amount = 50
+speed_scale = 2.1
+explosiveness = 1.0
+process_material = SubResource( 18 )
+
+[node name="Smoke Particles" parent="." instance=ExtResource( 5 )]
+visible = false
+scale = Vector2( 0.5, 0.5 )
+emitting = true
+lifetime = 0.5
+
+[node name="Light" parent="." instance=ExtResource( 1 )]
+
+[connection signal="animation_finished" from="Animation" to="." method="_on_Animation_animation_finished"]

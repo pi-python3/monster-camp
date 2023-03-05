@@ -1,0 +1,16 @@
+{
+	"type": "environment",
+	"objects":
+	[
+		{
+			"name": "explosive_barrel",
+			"damage": 4,
+			"stun": true
+		},
+		{
+			"name": "crate",
+			"damage": 1,
+			"stun": false
+		}
+	]
+}

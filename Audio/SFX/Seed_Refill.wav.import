@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Seed_Refill.wav-f93e1d49ded132d96a6f6874e40158ad.sample"
+
+[deps]
+
+source_file="res://Audio/SFX/Seed_Refill.wav"
+dest_files=[ "res://.import/Seed_Refill.wav-f93e1d49ded132d96a6f6874e40158ad.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

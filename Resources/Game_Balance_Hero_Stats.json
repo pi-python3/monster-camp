@@ -1,0 +1,49 @@
+{
+	"type": "hero stats",
+	"health":
+		[
+			{
+				"level": [0,1,2],
+				"health": 6
+			},
+			{
+				"level": [3,4,5],
+				"health": 8
+			},
+			{
+				"level": [6,7,8],
+				"health": 12
+			},
+			{
+				"level": [9,10,11],
+				"health": 16
+			},
+			{
+				"level": [12,13,14,15],
+				"health": 18
+			},
+			{
+				"level": [16],
+				"health": 36
+			}
+		],
+	"stamina":
+		[
+			{
+				"level": [0,1,2],
+				"stamina": 1
+			},
+			{
+				"level": [3,4,5],
+				"stamina": 2
+			},
+			{
+				"level": [6,7,8,9],
+				"stamina": 3
+			},
+			{
+				"level": [10,11,12,13,14,15,16],
+				"stamina": 4
+			}
+		]
+}

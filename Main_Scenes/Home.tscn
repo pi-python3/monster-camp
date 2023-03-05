@@ -1,0 +1,369 @@
+[gd_scene load_steps=38 format=2]
+
+[ext_resource path="res://UI/Title/Title_Text.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Shaders/Squish.tres" type="Material" id=2]
+[ext_resource path="res://Terrain/Terrain_Tileset.tres" type="TileSet" id=3]
+[ext_resource path="res://Enemies/Boko/Boko.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Environment/Objects.gd" type="Script" id=5]
+[ext_resource path="res://Environment/Objects_Tileset.tres" type="TileSet" id=6]
+[ext_resource path="res://Terrain/Terrain_Objects.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Helpers/Level.gd" type="Script" id=8]
+[ext_resource path="res://UI/slkscr.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://Terrain/Water.tscn" type="PackedScene" id=10]
+[ext_resource path="res://UI/Menu_Buttons/Settings_light.png" type="Texture" id=13]
+[ext_resource path="res://UI/Menu_Buttons/Back_button.png" type="Texture" id=14]
+[ext_resource path="res://UI/Menu_Buttons/Menu_Button.tscn" type="PackedScene" id=15]
+[ext_resource path="res://UI/Menu_Buttons/Music_on_button.png" type="Texture" id=16]
+[ext_resource path="res://UI/Menu_Buttons/Feedback_button_light.png" type="Texture" id=17]
+[ext_resource path="res://UI/Menu_Buttons/Settings.png" type="Texture" id=18]
+[ext_resource path="res://UI/Menu_Buttons/Music_on_button_light.png" type="Texture" id=19]
+[ext_resource path="res://UI/Menu_Buttons/Music_off_button_light.png" type="Texture" id=20]
+[ext_resource path="res://UI/Menu_Buttons/Music_off_button.png" type="Texture" id=21]
+[ext_resource path="res://UI/Menu_Buttons/Toggle_Button.tscn" type="PackedScene" id=22]
+[ext_resource path="res://UI/Menu_Buttons/Back_button_light.png" type="Texture" id=23]
+[ext_resource path="res://UI/Options/Back_Button.gd" type="Script" id=24]
+[ext_resource path="res://UI/Menu_Buttons/Sparkle.tscn" type="PackedScene" id=25]
+[ext_resource path="res://UI/Menu_Theme.tres" type="Theme" id=26]
+[ext_resource path="res://UI/Menu_Buttons/Feedback_button.png" type="Texture" id=27]
+[ext_resource path="res://UI/HUD/Pause_Panel_Texture.tres" type="StyleBox" id=28]
+[ext_resource path="res://UI/Menu_Buttons/Hat_button_off_light.png" type="Texture" id=29]
+[ext_resource path="res://UI/Menu_Buttons/Hat_button_on_light.png" type="Texture" id=30]
+[ext_resource path="res://UI/Menu_Buttons/Hat_button_off.png" type="Texture" id=31]
+[ext_resource path="res://UI/Menu_Buttons/Hat_button_on.png" type="Texture" id=32]
+[ext_resource path="res://UI/Menu_Buttons/Mobile_button_on.png" type="Texture" id=33]
+[ext_resource path="res://UI/Menu_Buttons/Mobile_button_off_light.png" type="Texture" id=34]
+[ext_resource path="res://UI/Menu_Buttons/Mobile_button_on_light.png" type="Texture" id=35]
+[ext_resource path="res://UI/Menu_Buttons/Mobile_button_off.png" type="Texture" id=36]
+
+[sub_resource type="DynamicFont" id=4]
+size = 40
+outline_size = 4
+outline_color = Color( 0.45098, 0.152941, 0.360784, 1 )
+font_data = ExtResource( 9 )
+
+[sub_resource type="Animation" id=10]
+resource_name = "Hover"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 0.00112177 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 5 ), Vector2( 0, -5 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 5.0, -5.0, 0.0 ]
+}
+
+[sub_resource type="DynamicFont" id=13]
+outline_size = 2
+outline_color = Color( 0.152941, 0.152941, 0.211765, 1 )
+font_data = ExtResource( 9 )
+
+[node name="Game" type="Node2D"]
+position = Vector2( 80, 0 )
+script = ExtResource( 8 )
+
+[node name="Environment" type="YSort" parent="."]
+
+[node name="Monsters" type="YSort" parent="Environment"]
+
+[node name="Boko" parent="Environment/Monsters" instance=ExtResource( 4 )]
+position = Vector2( 480, 320 )
+
+[node name="Boko2" parent="Environment/Monsters" instance=ExtResource( 4 )]
+position = Vector2( 120, 320 )
+
+[node name="Terrain_Objects" parent="Environment" instance=ExtResource( 7 )]
+
+[node name="Objects" type="TileMap" parent="Environment"]
+scale = Vector2( 5, 5 )
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 8, 8 )
+cell_y_sort = true
+format = 1
+tile_data = PoolIntArray( 327683, 0, 0, 393217, 0, 1, 393218, 0, 1, 393219, 0, 1, 393227, 0, 1, 393228, 0, 1, 393229, 0, 1, 458756, 0, 1, 458762, 0, 1, 720899, 0, 0, 720902, 0, 1, 720903, 0, 1, 720904, 0, 1, 720910, 0, 0, 786437, 0, 1, 786441, 0, 1, 851969, 0, 0, 851975, 0, 3, 917509, 0, 1, 917513, 0, 1 )
+script = ExtResource( 5 )
+
+[node name="Ground" type="TileMap" parent="."]
+scale = Vector2( 5, 5 )
+z_index = -1000
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 8, 8 )
+cell_quadrant_size = 4
+format = 1
+tile_data = PoolIntArray( -1, 6, 0, -65536, 6, 0, -65535, 6, 0, -65534, 6, 0, -65533, 6, 0, -65532, 6, 0, -65531, 6, 0, -65530, 6, 0, -65529, 6, 0, -65528, 6, 0, -65527, 6, 0, -65526, 6, 0, -65525, 6, 0, -65524, 6, 0, -65523, 6, 0, -65522, 6, 0, -65521, 6, 0, 65534, 19, 0, 65535, 19, 0, 0, 19, 0, 1, 19, 0, 2, 19, 0, 3, 19, 0, 4, 10, 8, 5, 10, 0, 6, 10, 0, 7, 10, 0, 8, 10, 0, 9, 10, 0, 10, 10, 9, 11, 19, 0, 12, 19, 0, 13, 19, 0, 14, 19, 0, 15, 19, 0, 16, 19, 0, 131070, 19, 0, 131071, 19, 0, 65536, 19, 0, 65537, 19, 0, 65538, 19, 0, 65539, 19, 0, 65540, 19, 0, 65541, 10, 8, 65542, 10, 0, 65543, 10, 0, 65544, 10, 0, 65545, 10, 9, 65546, 19, 0, 65547, 19, 0, 65548, 19, 0, 65549, 19, 0, 65550, 19, 0, 65551, 19, 0, 65552, 19, 0, 196606, 19, 0, 196607, 19, 0, 131072, 19, 0, 131073, 19, 0, 131074, 19, 0, 131075, 19, 0, 131076, 19, 0, 131077, 19, 0, 131078, 10, 3, 131079, 10, 0, 131080, 10, 2, 131081, 19, 0, 131082, 19, 0, 131083, 19, 0, 131084, 19, 0, 131085, 19, 0, 131086, 19, 0, 131087, 19, 0, 131088, 19, 0, 262142, 19, 0, 262143, 19, 0, 196608, 19, 0, 196609, 19, 0, 196610, 19, 0, 196611, 19, 0, 196612, 19, 0, 196613, 19, 0, 196614, 10, 3, 196615, 10, 0, 196616, 10, 2, 196617, 19, 0, 196618, 19, 0, 196619, 19, 0, 196620, 19, 0, 196621, 19, 0, 196622, 19, 0, 196623, 19, 0, 196624, 19, 0, 327678, 19, 0, 327679, 19, 0, 262144, 19, 0, 262145, 19, 0, 262146, 19, 0, 262147, 19, 0, 262148, 19, 0, 262149, 19, 0, 262150, 10, 3, 262151, 10, 0, 262152, 10, 2, 262153, 19, 0, 262154, 19, 0, 262155, 19, 0, 262156, 19, 0, 262157, 19, 0, 262158, 19, 0, 262159, 19, 0, 262160, 19, 0, 393214, 19, 0, 393215, 19, 0, 327680, 19, 0, 327681, 19, 0, 327682, 19, 0, 327683, 19, 0, 327684, 19, 0, 327685, 19, 0, 327686, 10, 3, 327687, 10, 0, 327688, 10, 2, 327689, 19, 0, 327690, 19, 0, 327691, 19, 0, 327692, 19, 0, 327693, 19, 0, 327694, 19, 0, 327695, 19, 0, 327696, 19, 0, 458750, 19, 0, 458751, 19, 0, 393216, 19, 0, 393217, 10, 7, 393218, 10, 4, 393219, 10, 4, 393220, 10, 6, 393221, 19, 0, 393222, 10, 3, 393223, 10, 0, 393224, 10, 2, 393225, 19, 0, 393226, 10, 7, 393227, 10, 4, 393228, 10, 4, 393229, 10, 6, 393230, 19, 0, 393231, 19, 0, 393232, 19, 0, 524286, 19, 0, 524287, 19, 0, 458752, 19, 0, 458753, 10, 3, 458754, 10, 0, 458755, 10, 0, 458756, 10, 2, 458757, 19, 0, 458758, 10, 3, 458759, 10, 0, 458760, 10, 2, 458761, 19, 0, 458762, 10, 3, 458763, 10, 0, 458764, 10, 0, 458765, 10, 2, 458766, 19, 0, 458767, 19, 0, 458768, 19, 0, 589822, 19, 0, 589823, 19, 0, 524288, 19, 0, 524289, 10, 8, 524290, 10, 0, 524291, 10, 0, 524292, 10, 9, 524293, 19, 0, 524294, 10, 3, 524295, 10, 0, 524296, 10, 2, 524297, 19, 0, 524298, 10, 8, 524299, 10, 0, 524300, 10, 0, 524301, 10, 9, 524302, 19, 0, 524303, 19, 0, 524304, 19, 0, 655358, 19, 0, 655359, 19, 0, 589824, 19, 0, 589825, 19, 0, 589826, 10, 8, 589827, 10, 9, 589828, 19, 0, 589829, 19, 0, 589830, 10, 3, 589831, 10, 0, 589832, 10, 2, 589833, 19, 0, 589834, 19, 0, 589835, 10, 3, 589836, 10, 2, 589837, 19, 0, 589838, 19, 0, 589839, 19, 0, 589840, 19, 0, 720894, 19, 0, 720895, 19, 0, 655360, 19, 0, 655361, 19, 0, 655362, 19, 0, 655363, 19, 0, 655364, 19, 0, 655365, 19, 0, 655366, 10, 3, 655367, 10, 0, 655368, 10, 2, 655369, 19, 0, 655370, 19, 0, 655371, 10, 3, 655372, 10, 2, 655373, 19, 0, 655374, 19, 0, 655375, 19, 0, 655376, 19, 0, 786430, 19, 0, 786431, 19, 0, 720896, 19, 0, 720897, 19, 0, 720898, 19, 0, 720899, 19, 0, 720900, 19, 0, 720901, 19, 0, 720902, 10, 3, 720903, 10, 0, 720904, 10, 2, 720905, 19, 0, 720906, 10, 7, 720907, 10, 0, 720908, 10, 0, 720909, 10, 4, 720910, 10, 4, 720911, 10, 4, 720912, 10, 4, 851966, 10, 4, 851967, 10, 4, 786432, 10, 6, 786433, 19, 0, 786434, 19, 0, 786435, 19, 0, 786436, 10, 7, 786437, 10, 4, 786438, 10, 0, 786439, 10, 0, 786440, 10, 0, 786441, 10, 4, 786442, 10, 0, 786443, 19, 0, 786444, 19, 0, 786445, 19, 0, 786446, 19, 0, 786447, 19, 0, 786448, 19, 0, 917502, 10, 0, 917503, 10, 0, 851968, 10, 2, 851969, 19, 0, 851970, 19, 0, 851971, 19, 0, 851972, 10, 3, 851973, 10, 0, 851974, 10, 0, 851975, 10, 0, 851976, 10, 0, 851977, 10, 0, 851978, 10, 2, 851979, 19, 0, 851980, 19, 0, 851981, 19, 0, 851982, 19, 0, 851983, 19, 0, 851984, 19, 0, 983038, 10, 0, 983039, 10, 4, 917504, 10, 2, 917505, 19, 0, 917506, 19, 0, 917507, 10, 7, 917508, 10, 0, 917509, 10, 0, 917510, 10, 0, 917511, 10, 0, 917512, 10, 0, 917513, 10, 0, 917514, 10, 0, 917515, 10, 6, 917516, 19, 0, 917517, 19, 0, 917518, 19, 0, 917519, 19, 0, 917520, 19, 0, 1048575, 6, 0, 983040, 6, 0, 983041, 6, 0, 983042, 6, 0, 983043, 6, 0, 983044, 6, 0, 983045, 6, 0, 983046, 6, 0, 983047, 6, 0, 983048, 6, 0, 983049, 6, 0, 983050, 6, 0, 983051, 6, 0, 983052, 6, 0, 983053, 6, 0, 983054, 6, 0, 983055, 6, 0 )
+
+[node name="Water" parent="." instance=ExtResource( 10 )]
+tile_data = PoolIntArray( 786443, 2, 0, 786444, 2, 0, 786445, 2, 0, 786446, 2, 0, 786447, 2, 0, 786448, 2, 0, 851978, 2, 0, 851979, 1, 0, 851980, 1, 0, 851981, 1, 0, 851982, 1, 0, 851983, 1, 0, 851984, 1, 0, 917514, 1, 0, 917515, 1, 0, 917516, 1, 0, 917517, 1, 0, 917518, 1, 0, 917519, 1, 0, 917520, 1, 0 )
+
+[node name="Title_Offset" type="Control" parent="."]
+margin_top = -40.0
+margin_right = 120.0
+margin_bottom = 60.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title_Text" parent="Title_Offset" instance=ExtResource( 1 )]
+margin_left = -5.0
+margin_top = 85.0
+margin_right = 2435.0
+margin_bottom = 523.0
+
+[node name="Feedback_Button" parent="." instance=ExtResource( 15 )]
+margin_left = 432.0
+margin_top = 512.0
+margin_right = 672.0
+margin_bottom = 592.0
+rect_min_size = Vector2( 240, 80 )
+rect_pivot_offset = Vector2( 120, 40 )
+hint_tooltip = "Give feedback"
+texture_normal = ExtResource( 27 )
+texture_pressed = ExtResource( 27 )
+texture_hover = ExtResource( 17 )
+type = 5
+sparkle = true
+
+[node name="Sparkle" parent="Feedback_Button" index="1"]
+position = Vector2( 236.915, 7.42731 )
+frame = 13
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options_Center_Container" type="CenterContainer" parent="CanvasLayer/UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options_Popup" type="PopupPanel" parent="CanvasLayer/UI/Options_Center_Container"]
+pause_mode = 2
+margin_left = 266.0
+margin_top = 59.0
+margin_right = 493.0
+margin_bottom = 540.0
+mouse_filter = 2
+custom_styles/panel = ExtResource( 28 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/Options_Center_Container/Options_Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
+mouse_filter = 2
+custom_constants/separation = 40
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/Options_Center_Container/Options_Popup/VBoxContainer"]
+margin_right = 187.0
+margin_bottom = 41.0
+custom_colors/font_color = Color( 1, 0.894118, 0.470588, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "Options"
+align = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/UI/Options_Center_Container/Options_Popup/VBoxContainer"]
+margin_top = 81.0
+margin_right = 187.0
+margin_bottom = 161.0
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI/Options_Center_Container/Options_Popup/VBoxContainer/CenterContainer"]
+margin_left = 3.0
+margin_right = 183.0
+margin_bottom = 80.0
+mouse_filter = 2
+custom_constants/separation = 20
+
+[node name="Toggle_Button" parent="CanvasLayer/UI/Options_Center_Container/Options_Popup/VBoxContainer/CenterContainer/HBoxContainer" instance=ExtResource( 22 )]
+margin_top = 0.0
+margin_bottom = 80.0
+hint_tooltip = "SFX on/off"
+
+[node name="Toggle_Button2" parent="CanvasLayer/UI/Options_Center_Container/Options_Popup/VBoxContainer/CenterContainer/HBoxContainer" instance=ExtResource( 22 )]
+margin_left = 100.0
+margin_top = 0.0
+margin_right = 180.0
+margin_bottom = 80.0
+hint_tooltip = "Music on/off"
+texture_normal = ExtResource( 16 )
+texture_pressed = ExtResource( 21 )
+texture_hover = ExtResource( 19 )
+type = 1
+on_hover_texture = ExtResource( 19 )
+off_hover_texture = ExtResource( 20 )
+
+[node name="CenterContainer3" type="CenterContainer" parent="CanvasLayer/UI/Options_Center_Container/Options_Popup/VBoxContainer"]
+margin_top = 201.0
+margin_right = 187.0
+margin_bottom = 281.0
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI/Options_Center_Container/Options_Popup/VBoxContainer/CenterContainer3"]
+margin_left = 53.0
+margin_right = 133.0
+margin_bottom = 80.0
+mouse_filter = 2
+custom_constants/separation = 20
+
+[node name="Toggle_Button" parent="CanvasLayer/UI/Options_Center_Container/Options_Popup/VBoxContainer/CenterContainer3/HBoxContainer" instance=ExtResource( 22 )]
+margin_top = 0.0
+margin_bottom = 80.0
+hint_tooltip = "SFX on/off"
+texture_normal = ExtResource( 32 )
+texture_pressed = ExtResource( 31 )
+texture_hover = ExtResource( 30 )
+type = 2
+on_hover_texture = ExtResource( 30 )
+off_hover_texture = ExtResource( 29 )
+
+[node name="Control" type="Control" parent="CanvasLayer/UI/Options_Center_Container/Options_Popup/VBoxContainer"]
+margin_top = 321.0
+margin_right = 187.0
+margin_bottom = 321.0
+
+[node name="CenterContainer2" type="CenterContainer" parent="CanvasLayer/UI/Options_Center_Container/Options_Popup/VBoxContainer"]
+margin_top = 361.0
+margin_right = 187.0
+margin_bottom = 441.0
+mouse_filter = 2
+
+[node name="Back_Button" type="TextureButton" parent="CanvasLayer/UI/Options_Center_Container/Options_Popup/VBoxContainer/CenterContainer2"]
+material = ExtResource( 2 )
+margin_left = 53.0
+margin_right = 133.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 80, 80 )
+rect_pivot_offset = Vector2( 40, 40 )
+hint_tooltip = "Back"
+mouse_default_cursor_shape = 2
+theme = ExtResource( 26 )
+shortcut_in_tooltip = false
+texture_normal = ExtResource( 14 )
+texture_pressed = ExtResource( 14 )
+texture_hover = ExtResource( 23 )
+expand = true
+stretch_mode = 4
+script = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/UI/Options_Center_Container/Options_Popup/VBoxContainer/CenterContainer2/Back_Button"]
+anims/Hover = SubResource( 10 )
+
+[node name="Sparkle" parent="CanvasLayer/UI/Options_Center_Container/Options_Popup/VBoxContainer/CenterContainer2/Back_Button" instance=ExtResource( 25 )]
+visible = false
+frame = 13
+
+[node name="Buttons_Center_Container" type="CenterContainer" parent="CanvasLayer/UI"]
+margin_right = 760.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 600, 600 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Play_Button" parent="CanvasLayer/UI/Buttons_Center_Container" instance=ExtResource( 15 )]
+margin_left = 340.0
+margin_top = 260.0
+margin_right = 420.0
+margin_bottom = 340.0
+sparkle = true
+
+[node name="Mobile_Button" parent="." instance=ExtResource( 22 )]
+margin_left = -60.0
+margin_top = 400.0
+margin_right = 20.0
+margin_bottom = 480.0
+hint_tooltip = "Mobile Buttons on/off"
+texture_normal = ExtResource( 33 )
+texture_pressed = ExtResource( 36 )
+texture_hover = ExtResource( 35 )
+type = 3
+on_hover_texture = ExtResource( 35 )
+off_hover_texture = ExtResource( 34 )
+
+[node name="Options_Button" parent="." instance=ExtResource( 15 )]
+margin_left = -60.0
+margin_top = 500.0
+margin_right = 20.0
+margin_bottom = 580.0
+hint_tooltip = "Options"
+texture_normal = ExtResource( 18 )
+texture_pressed = ExtResource( 18 )
+texture_hover = ExtResource( 13 )
+type = 1
+sparkle = true
+
+[node name="Tween" type="Tween" parent="Options_Button"]
+
+[node name="Credit" type="Label" parent="."]
+margin_left = 200.0
+margin_top = 560.0
+margin_right = 412.0
+margin_bottom = 577.0
+rect_pivot_offset = Vector2( 106, 8.5 )
+custom_fonts/font = SubResource( 13 )
+text = "Made by FreeFlux Dev"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Music_Credit" type="Label" parent="."]
+modulate = Color( 1, 1, 1, 0.705882 )
+margin_left = 200.0
+margin_top = 580.0
+margin_right = 412.0
+margin_bottom = 597.0
+rect_pivot_offset = Vector2( 106, 8.5 )
+custom_fonts/font = SubResource( 13 )
+text = "Music by StreamBeats"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+
+[connection signal="popup_hide" from="CanvasLayer/UI/Options_Center_Container/Options_Popup" to="Options_Button" method="_on_Options_Popup_popup_hide"]
+[connection signal="mouse_entered" from="CanvasLayer/UI/Options_Center_Container/Options_Popup/VBoxContainer/CenterContainer2/Back_Button" to="CanvasLayer/UI/Options_Center_Container/Options_Popup/VBoxContainer/CenterContainer2/Back_Button" method="_on_Back_Button_mouse_entered"]
+[connection signal="pressed" from="CanvasLayer/UI/Options_Center_Container/Options_Popup/VBoxContainer/CenterContainer2/Back_Button" to="CanvasLayer/UI/Options_Center_Container/Options_Popup/VBoxContainer/CenterContainer2/Back_Button" method="_on_Back_Button_pressed"]
+
+[editable path="Environment/Monsters/Boko"]
+[editable path="Environment/Monsters/Boko2"]
+[editable path="Feedback_Button"]

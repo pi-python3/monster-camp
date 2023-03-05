@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://Shaders/Grass_Wave.shader" type="Shader" id=1]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/sprite_size = Vector2( 8, 8 )
+shader_param/squash_amount = 7.0
+shader_param/speed = 1.0

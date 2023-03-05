@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Environment/Smoke_Particles.tres" type="Material" id=1]
+[ext_resource path="res://Environment/Explosion_particle.png" type="Texture" id=2]
+
+[node name="Smoke Particles" type="Particles2D"]
+scale = Vector2( 1.2, 1.2 )
+z_index = 9
+z_as_relative = false
+emitting = false
+amount = 50
+one_shot = true
+explosiveness = 0.87
+process_material = ExtResource( 1 )
+texture = ExtResource( 2 )

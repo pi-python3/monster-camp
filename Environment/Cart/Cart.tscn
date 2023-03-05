@@ -1,0 +1,299 @@
+[gd_scene load_steps=43 format=2]
+
+[ext_resource path="res://Environment/Cart/Cart_State_Machine.gd" type="Script" id=1]
+[ext_resource path="res://Environment/Cart/Cart_shadow.png" type="Texture" id=2]
+[ext_resource path="res://Enemies/Peapo/Seed_Break_Particles.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Environment/Crate_particle.png" type="Texture" id=4]
+[ext_resource path="res://Helpers/Sprite_Handler.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Audio/SFX/Crate_Slide.wav" type="AudioStream" id=6]
+[ext_resource path="res://Enemies/Move_Particles.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Environment/Cart/Cart.png" type="Texture" id=8]
+[ext_resource path="res://Environment/Cart/Slide.gd" type="Script" id=9]
+[ext_resource path="res://Environment/Crate/Idle.gd" type="Script" id=10]
+[ext_resource path="res://Environment/Cart/Hit_Slide.gd" type="Script" id=11]
+[ext_resource path="res://Environment/Cart/Hit.gd" type="Script" id=12]
+[ext_resource path="res://Environment/Crate/Break.gd" type="Script" id=13]
+[ext_resource path="res://Environment/Cart/Cart_water.png" type="Texture" id=14]
+[ext_resource path="res://Environment/Cart/Water.gd" type="Script" id=15]
+
+[sub_resource type="RectangleShape2D" id=26]
+extents = Vector2( 2.47557, 2.98247 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 4.2, 3.2 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 4.5, 3.21139 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 5, 4 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4, 2 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 8 )
+region = Rect2( 24, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 8 )
+region = Rect2( 16, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 8 )
+region = Rect2( 8, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 8 )
+region = Rect2( 8, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 8 )
+region = Rect2( 16, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 8 )
+region = Rect2( 24, 0, 8, 8 )
+
+[sub_resource type="SpriteFrames" id=9]
+animations = [ {
+"frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ) ],
+"loop": true,
+"name": "Roll Left",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "Roll Right",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=10]
+length = 0.2
+tracks/0/type = "method"
+tracks/0/path = NodePath("../Sprite_Handler")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "flash_on"
+}, {
+"args": [  ],
+"method": "flash_off"
+} ]
+}
+
+[sub_resource type="RectangleShape2D" id=27]
+extents = Vector2( 3, 1 )
+
+[sub_resource type="Gradient" id=11]
+offsets = PoolRealArray( 0, 0.564202, 0.988327, 1 )
+colors = PoolColorArray( 0.801555, 0.804688, 0.760257, 1, 0.783967, 0.789062, 0.740654, 1, 1, 1, 1, 0.474708, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=12]
+gradient = SubResource( 11 )
+
+[sub_resource type="Curve" id=13]
+_data = [ Vector2( 0, 0.507827 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=14]
+curve = SubResource( 13 )
+
+[sub_resource type="ParticlesMaterial" id=15]
+flag_disable_z = true
+spread = 10.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 1.0
+angular_velocity = 258.68
+angular_velocity_random = 0.6
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -7.19
+scale = 15.0
+scale_random = 0.33
+scale_curve = SubResource( 14 )
+color_ramp = SubResource( 12 )
+
+[sub_resource type="Curve" id=16]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.158806 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=17]
+curve = SubResource( 16 )
+
+[sub_resource type="ParticlesMaterial" id=18]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 70, 0 )
+initial_velocity = 45.0
+initial_velocity_random = 0.5
+angular_velocity = 360.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 40.77
+scale_curve = SubResource( 17 )
+hue_variation = 0.01
+
+[sub_resource type="Curve" id=19]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.158806 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=20]
+curve = SubResource( 19 )
+
+[sub_resource type="ParticlesMaterial" id=21]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 70, 0 )
+initial_velocity = 45.0
+initial_velocity_random = 0.5
+angular_velocity = 360.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 40.77
+scale = 2.0
+scale_curve = SubResource( 20 )
+hue_variation = 0.01
+
+[node name="Cart" type="KinematicBody2D" groups=["Cart", "Interactable", "Pushable"]]
+position = Vector2( 4, 4 )
+collision_mask = 7
+script = ExtResource( 1 )
+START_STATE = NodePath("States/Idle")
+max_health = 12
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2( -0.000254631, 1.5018 )
+rotation = 1.5708
+shape = SubResource( 26 )
+
+[node name="Hitbox" type="Area2D" parent="."]
+visible = false
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( 0, 1 )
+shape = SubResource( 2 )
+
+[node name="Slide_Hitbox" type="Area2D" parent="." groups=["Universal_Hitbox"]]
+visible = false
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Slide_Hitbox"]
+position = Vector2( 0, 1 )
+shape = SubResource( 3 )
+
+[node name="Pickup_Hitbox" type="Area2D" parent="." groups=["Pickup_Hitbox"]]
+visible = false
+collision_mask = 7
+
+[node name="Collision" type="CollisionShape2D" parent="Pickup_Hitbox"]
+position = Vector2( 0, 1 )
+shape = SubResource( 4 )
+disabled = true
+
+[node name="Projectile_Hitbox" type="Area2D" parent="."]
+visible = false
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Projectile_Hitbox"]
+position = Vector2( 0, 2 )
+shape = SubResource( 1 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Sprite_Handler" parent="." instance=ExtResource( 5 )]
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 9 )
+animation = "Roll Left"
+frame = 1
+speed_scale = 3.0
+playing = true
+
+[node name="Shadow" type="Sprite" parent="Sprite" groups=["No_Flash"]]
+modulate = Color( 1, 1, 1, 0.501961 )
+position = Vector2( 0, 4 )
+z_index = -1
+texture = ExtResource( 2 )
+
+[node name="Animation" type="AnimationPlayer" parent="Sprite"]
+anims/Hit = SubResource( 10 )
+
+[node name="Water" type="Sprite" parent="Sprite" groups=["No_Flash"]]
+texture = ExtResource( 14 )
+script = ExtResource( 15 )
+
+[node name="Wheel_Hitbox" type="Area2D" parent="Sprite/Water"]
+collision_mask = 16
+
+[node name="Collision" type="CollisionShape2D" parent="Sprite/Water/Wheel_Hitbox"]
+position = Vector2( 0, 3 )
+shape = SubResource( 27 )
+
+[node name="Move_Particles" parent="." instance=ExtResource( 7 )]
+process_material = SubResource( 15 )
+
+[node name="Push_Wait" type="Timer" parent="Move_Particles"]
+wait_time = 0.1
+one_shot = true
+
+[node name="Hit_Particles" parent="." instance=ExtResource( 3 )]
+scale = Vector2( 1, 1 )
+amount = 12
+process_material = SubResource( 18 )
+texture = ExtResource( 4 )
+
+[node name="Particle_Wait" type="Timer" parent="Hit_Particles"]
+one_shot = true
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Hit_Particles2" parent="." instance=ExtResource( 3 )]
+process_material = SubResource( 21 )
+texture = ExtResource( 4 )
+
+[node name="Push_SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -10.0
+bus = "SFX_Quiet"
+
+[node name="States" type="Node" parent="."]
+
+[node name="Idle" type="Node" parent="States"]
+script = ExtResource( 10 )
+
+[node name="Slide" type="Node" parent="States"]
+script = ExtResource( 9 )
+slide_speed = 70.0
+
+[node name="Hit_Slide" type="Node" parent="States"]
+script = ExtResource( 11 )
+
+[node name="Hit" type="Node" parent="States"]
+script = ExtResource( 12 )
+
+[node name="Cooldown" type="Timer" parent="States/Hit"]
+wait_time = 0.2
+one_shot = true
+
+[node name="Break" type="Node" parent="States"]
+script = ExtResource( 13 )
+
+[connection signal="body_entered" from="Sprite/Water/Wheel_Hitbox" to="Sprite/Water" method="_on_Wheel_Hitbox_body_entered"]
+[connection signal="timeout" from="Move_Particles/Push_Wait" to="." method="_on_Push_Wait_timeout"]
+[connection signal="timeout" from="Hit_Particles/Particle_Wait" to="." method="_on_Particle_Wait_timeout"]
+[connection signal="timeout" from="States/Hit/Cooldown" to="States/Hit" method="_on_Cooldown_timeout"]

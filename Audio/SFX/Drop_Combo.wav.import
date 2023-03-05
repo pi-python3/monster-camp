@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Drop_Combo.wav-87891595e4f21639721cadf0f5190792.sample"
+
+[deps]
+
+source_file="res://Audio/SFX/Drop_Combo.wav"
+dest_files=[ "res://.import/Drop_Combo.wav-87891595e4f21639721cadf0f5190792.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

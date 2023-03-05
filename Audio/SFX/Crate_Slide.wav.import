@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Crate_Slide.wav-5554820fa92d89a9f96bd11d3f8f7739.sample"
+
+[deps]
+
+source_file="res://Audio/SFX/Crate_Slide.wav"
+dest_files=[ "res://.import/Crate_Slide.wav-5554820fa92d89a9f96bd11d3f8f7739.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

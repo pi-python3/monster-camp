@@ -1,0 +1,317 @@
+[gd_scene load_steps=42 format=2]
+
+[ext_resource path="res://Enemies/Skele/Skele_Spriteframes.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Enemies/State_Machine.gd" type="Script" id=2]
+[ext_resource path="res://Enemies/Boko/Move.gd" type="Script" id=3]
+[ext_resource path="res://Enemies/Boko/Idle.gd" type="Script" id=4]
+[ext_resource path="res://Enemies/Boko/Attack.gd" type="Script" id=5]
+[ext_resource path="res://Enemies/Slash_Effect_Frames.tres" type="SpriteFrames" id=6]
+[ext_resource path="res://Helpers/Sprite_Handler.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Enemies/Hit.gd" type="Script" id=8]
+[ext_resource path="res://Enemies/Monster_UI.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Enemies/Monster_Effects.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Enemies/Boko/Slash_Hitbox.gd" type="Script" id=11]
+[ext_resource path="res://Enemies/Keesee/Keesee_Attack_Trail.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Enemies/Sprite.gd" type="Script" id=13]
+[ext_resource path="res://Enemies/Die.gd" type="Script" id=14]
+[ext_resource path="res://Enemies/Eyes.png" type="Texture" id=15]
+[ext_resource path="res://Enemies/Eyes.gd" type="Script" id=16]
+[ext_resource path="res://Enemies/AI_Move.gd" type="Script" id=17]
+[ext_resource path="res://Enemies/Death_Right.tres" type="Animation" id=18]
+[ext_resource path="res://Enemies/Death_Left.tres" type="Animation" id=19]
+[ext_resource path="res://Enemies/Skele/Slash_Left_Slow.tres" type="Animation" id=20]
+[ext_resource path="res://Enemies/Move.tres" type="Animation" id=21]
+[ext_resource path="res://Helpers/Target_Point.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Enemies/Skele/Skele_head.png" type="Texture" id=23]
+[ext_resource path="res://Enemies/Boko/Hitbox.gd" type="Script" id=24]
+[ext_resource path="res://Enemies/Skele/Slam_Particles.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Enemies/Components/Component_Dance.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Enemies/Humanoid_Collision_Shape.tres" type="Shape2D" id=29]
+[ext_resource path="res://Enemies/Hat.tscn" type="PackedScene" id=30]
+[ext_resource path="res://Enemies/Components/Component_Cartable.tscn" type="PackedScene" id=31]
+[ext_resource path="res://Enemies/Drown_Anim.tres" type="Animation" id=33]
+[ext_resource path="res://Enemies/Dance.tres" type="Animation" id=34]
+[ext_resource path="res://Enemies/Components/Component_Push_Objects.tscn" type="PackedScene" id=35]
+[ext_resource path="res://Enemies/Components/Component_Manager.tscn" type="PackedScene" id=36]
+[ext_resource path="res://Enemies/Components/Component_Can_Drown.tscn" type="PackedScene" id=37]
+[ext_resource path="res://Enemies/Components/Component_Grounded.tscn" type="PackedScene" id=38]
+[ext_resource path="res://Enemies/Skele/Slash_Right_Slow.tres" type="Animation" id=39]
+
+[sub_resource type="CapsuleShape2D" id=13]
+radius = 2.46321
+height = 0.377663
+
+[sub_resource type="Animation" id=8]
+length = 0.4
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.375 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 18 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("..:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("Slash_Hitbox")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "offset_on"
+}, {
+"args": [  ],
+"method": "offset_off"
+} ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Slash_Hitbox/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("..:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -30.0, 15.0, 0.0 ]
+}
+tracks/6/type = "method"
+tracks/6/path = NodePath("../Slam_Particles")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 1 ],
+"method": "emit"
+} ]
+}
+
+[sub_resource type="CapsuleShape2D" id=9]
+radius = 5.56358
+height = 4.52801
+
+[sub_resource type="Animation" id=10]
+length = 0.2
+tracks/0/type = "method"
+tracks/0/path = NodePath("../Sprite_Handler")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "flash_on"
+}, {
+"args": [  ],
+"method": "flash_off"
+} ]
+}
+
+[sub_resource type="Animation" id=11]
+length = 0.5
+
+[node name="Skele" type="KinematicBody2D" groups=["Monster", "Stun_Attack"]]
+scale = Vector2( 5, 5 )
+collision_layer = 2
+collision_mask = 23
+script = ExtResource( 2 )
+START_STATE = NodePath("States/Idle")
+monster_type = "skele"
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, 2 )
+shape = SubResource( 13 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Hitbox" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
+collision_mask = 5
+script = ExtResource( 24 )
+
+[node name="Collision" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( 0, 0.5 )
+shape = ExtResource( 29 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Target_Point" parent="." instance=ExtResource( 22 )]
+
+[node name="Components" parent="." instance=ExtResource( 36 )]
+
+[node name="Push_Objects" parent="Components" instance=ExtResource( 35 )]
+
+[node name="Grounded" parent="Components" instance=ExtResource( 38 )]
+
+[node name="Can_Drown" parent="Components" instance=ExtResource( 37 )]
+
+[node name="Cartable" parent="Components" instance=ExtResource( 31 )]
+
+[node name="Dance" parent="Components" instance=ExtResource( 28 )]
+
+[node name="Sprite_Handler" parent="." instance=ExtResource( 7 )]
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 1 )
+script = ExtResource( 13 )
+
+[node name="Eyes" type="Sprite" parent="Sprite"]
+visible = false
+texture = ExtResource( 15 )
+script = ExtResource( 16 )
+
+[node name="Slash_Effect" type="AnimatedSprite" parent="Sprite" groups=["No_Flash"]]
+visible = false
+z_index = 50
+z_as_relative = false
+frames = ExtResource( 6 )
+frame = 9
+speed_scale = 4.0
+
+[node name="Slash_Animation" type="AnimationPlayer" parent="Sprite/Slash_Effect"]
+anims/Slash_Left_Slow = ExtResource( 20 )
+anims/Slash_Right_Slow = SubResource( 8 )
+
+[node name="Slash_Hitbox" type="Area2D" parent="Sprite/Slash_Effect" groups=["Monster_Hitbox"]]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource( 11 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Slash_Effect/Slash_Hitbox"]
+scale = Vector2( 0.392614, 0.525361 )
+shape = SubResource( 9 )
+disabled = true
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Slam_Particles" parent="Sprite" instance=ExtResource( 25 )]
+scale = Vector2( 1, 1 )
+
+[node name="Hat" parent="Sprite" instance=ExtResource( 30 )]
+
+[node name="Animation" type="AnimationPlayer" parent="Sprite"]
+anims/Dance = ExtResource( 34 )
+anims/Death_Left = ExtResource( 19 )
+anims/Death_Right = ExtResource( 18 )
+anims/Drown_Anim = ExtResource( 33 )
+anims/Hit = SubResource( 10 )
+anims/Idle = SubResource( 11 )
+anims/Move = ExtResource( 21 )
+
+[node name="Effects" parent="." instance=ExtResource( 10 )]
+attack_trail = {
+"active": false,
+"name": "Trail",
+"trail_scene": ExtResource( 12 )
+}
+
+[node name="UI" parent="." instance=ExtResource( 9 )]
+
+[node name="States" type="Node" parent="."]
+
+[node name="Idle" type="Node" parent="States"]
+script = ExtResource( 4 )
+
+[node name="Move" type="Node" parent="States"]
+script = ExtResource( 3 )
+MAX_MOVESPEED = 70.0
+
+[node name="AI_Move" type="KinematicBody2D" parent="States"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource( 17 )
+
+[node name="Seek_Collision_Mask" type="Area2D" parent="States/AI_Move"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="Run_Cooldown" type="Timer" parent="States/AI_Move"]
+wait_time = 4.0
+one_shot = true
+
+[node name="Attack" type="Node" parent="States"]
+script = ExtResource( 5 )
+attack_animations = {
+"left": ExtResource( 20 ),
+"right": ExtResource( 39 )
+}
+
+[node name="Cooldown_Timer" type="Timer" parent="States/Attack"]
+wait_time = 0.1
+one_shot = true
+
+[node name="Hit" type="Node" parent="States"]
+script = ExtResource( 8 )
+
+[node name="Cooldown" type="Timer" parent="States/Hit"]
+wait_time = 0.5
+one_shot = true
+
+[node name="Die" type="Node" parent="States"]
+script = ExtResource( 14 )
+DROP_WEAPON = true
+DROP_WEAPON_TEXTURE = ExtResource( 23 )
+
+[connection signal="animation_finished" from="Sprite/Slash_Effect/Slash_Animation" to="States/Attack" method="_on_Slash_Animation_animation_finished"]
+[connection signal="animation_finished" from="Sprite/Animation" to="." method="_on_animation_finished"]
+[connection signal="timeout" from="States/AI_Move/Run_Cooldown" to="States/AI_Move" method="_on_Run_Cooldown_timeout"]
+[connection signal="timeout" from="States/Attack/Cooldown_Timer" to="States/Attack" method="_on_Cooldown_Timer_timeout"]
+[connection signal="timeout" from="States/Hit/Cooldown" to="States/Hit" method="_on_Cooldown_timeout"]

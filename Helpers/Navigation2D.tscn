@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Helpers/Navigation_Tiles.tscn" type="PackedScene" id=1]
+
+[node name="Navigation2D" type="Navigation2D"]
+modulate = Color( 1, 1, 1, 0.396078 )
+
+[node name="Navigation_Tiles" parent="." instance=ExtResource( 1 )]
